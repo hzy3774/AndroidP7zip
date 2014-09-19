@@ -8,25 +8,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button_compress"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
-        android:ems="10"
-        android:singleLine="false" />
+        android:text="Compress" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_decompress"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_alignRight="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:layout_marginTop="23dp"
-        android:text="Button" />
+        android:layout_below="@+id/button_compress"
+        android:layout_marginTop="20dp"
+        android:text="Decompress" />
+
+    <Button
+        android:id="@+id/button_command"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_decompress"
+        android:layout_marginTop="20dp"
+        android:text="Command" />
 
 </RelativeLayout>

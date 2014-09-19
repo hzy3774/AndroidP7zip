@@ -4,5 +4,7 @@
     <string name="app_name">MyZipTest</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="progress_title">Tip</string>
+    <string name="progress_message">Please wait...</string>
 
 </resources>
