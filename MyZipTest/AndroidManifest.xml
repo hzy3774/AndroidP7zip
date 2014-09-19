@@ -30,6 +30,8 @@
         </activity>
         <activity android:name="DecompressActivity" >
         </activity>
+        <activity android:name="HelpActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.example.myziptest;
 
-import com.example.myziptest.R.id;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +8,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.example.myziptest.R.id;
+
 public class MainActivity extends Activity {
 	
-	Button btnCompress, btnDecompress, btnCommand;
+	Button btnCompress, btnDecompress, btnCommand, btnHelp;
 	OnClickListener listener = null;
 	
 	@Override
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
 		btnCompress = (Button) findViewById(R.id.button_compress);
 		btnDecompress = (Button) findViewById(R.id.button_decompress);
 		btnCommand = (Button) findViewById(R.id.button_command);
+		btnHelp = (Button) findViewById(R.id.button_help);
 		
 		this.listener = new OnClickListener() {
 			@Override
@@ -38,6 +40,9 @@ public class MainActivity extends Activity {
 				case id.button_command:
 					newActivity = CommandActivity.class;
 					break;
+				case id.button_help:
+					newActivity = HelpActivity.class;
+					break;
 				default:
 					return;
 				}
@@ -48,6 +53,7 @@ public class MainActivity extends Activity {
 		btnCompress.setOnClickListener(listener);
 		btnDecompress.setOnClickListener(listener);
 		btnCommand.setOnClickListener(listener);
+		btnHelp.setOnClickListener(listener);
 	}
 	
 	

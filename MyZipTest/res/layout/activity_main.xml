@@ -33,4 +33,12 @@
         android:layout_marginTop="20dp"
         android:text="Command" />
 
+    <Button
+        android:id="@+id/button_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_command"
+        android:layout_marginTop="20dp"
+        android:text="Help" />
+
 </RelativeLayout>
