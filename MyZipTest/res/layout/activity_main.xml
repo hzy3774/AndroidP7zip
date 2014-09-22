@@ -42,6 +42,14 @@
             android:layout_below="@+id/button_command"
             android:layout_marginTop="20dp"
             android:text="Help" />
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_help"
+            android:layout_marginTop="20dp"
+            android:text="Exit" />
     </RelativeLayout>
 
 </ScrollView>

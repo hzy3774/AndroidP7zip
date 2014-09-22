@@ -33,7 +33,9 @@ public class CommandActivity extends Activity {
 				// TODO Auto-generated method stub
 				switch (v.getId()) {
 				case id.buttonCmdExecute:
-					new ZipProcess(CommandActivity.this, 1, null).start();
+					new ZipProcess(CommandActivity.this, ZipProcess.TYPE_COMMAND, new String[]{
+							etCommand.getText().toString(),
+					}).start();
 					break;
 				case id.buttonCmdBack:
 					CommandActivity.this.finish();

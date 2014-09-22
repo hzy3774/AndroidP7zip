@@ -12,7 +12,7 @@ import com.example.myziptest.R.id;
 
 public class MainActivity extends Activity {
 	
-	Button btnCompress, btnDecompress, btnCommand, btnHelp;
+	Button btnCompress, btnDecompress, btnCommand, btnHelp, btnExit;
 	OnClickListener listener = null;
 	
 	@Override
@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 		btnDecompress = (Button) findViewById(R.id.button_decompress);
 		btnCommand = (Button) findViewById(R.id.button_command);
 		btnHelp = (Button) findViewById(R.id.button_help);
+		btnExit= (Button) findViewById(R.id.button_exit);
 		
 		this.listener = new OnClickListener() {
 			@Override
@@ -43,6 +44,9 @@ public class MainActivity extends Activity {
 				case id.button_help:
 					newActivity = HelpActivity.class;
 					break;
+				case id.button_exit:
+					MainActivity.this.finish();
+					return;
 				default:
 					return;
 				}
@@ -54,6 +58,7 @@ public class MainActivity extends Activity {
 		btnDecompress.setOnClickListener(listener);
 		btnCommand.setOnClickListener(listener);
 		btnHelp.setOnClickListener(listener);
+		btnExit.setOnClickListener(listener);
 	}
 	
 	
