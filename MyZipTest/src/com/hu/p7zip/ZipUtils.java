@@ -59,21 +59,7 @@ public class ZipUtils {
 	private static final String SWH_INCLUDE_FILE_NAMES = "-i";
 	private static final String SWH_EXCLUDE_FILE_NAMES = "-x";
 	
-	/*
-		0 No error 
-		1 Warning (Non fatal error(s)). For example, one or more files were locked by some other application,
-		  so they were not compressed. 
-		2 Fatal error 
-		7 Command line error 
-		8 Not enough memory for operation 
-		255 User stopped the process 
-	*/
-	private static final int RET_SUCCESS = 0;
-	private static final int RET_WARNING = 1;
-	private static final int RET_FAULT = 2;
-	private static final int RET_COMMAND = 7;
-	private static final int RET_MEMORY = 8;
-	private static final int RET_USER_STOP = 255;
+
 	
 	public static int command(String cmd)
 	{
@@ -91,14 +77,25 @@ public class ZipUtils {
 	/**
 	 * native interface
 	 */
-
 	private static native int executeCommand(String command);
 	
-	//freopenStdout("/mnt/sdcard/log/stdout.txt", "w");
-	private static native int freopenStdout(String filePath, String type);
+	/**
+	 * redirect stdout to a stream, default android stdout do nothing
+	 * freopenStdout("/mnt/sdcard/log/stdout.txt", "w");
+	 * @param filePath
+	 * @param mode often w+
+	 * @return
+	 */
+	private static native int freopenStdout(String filePath, String mode);
 	
-	//freopenStderr("/mnt/sdcard/log/stderr.txt", "w");
-	private static native int freopenStderr(String filePath, String type);
+	/**
+	 * redirect stderr to a stream, default android stderr do nothing
+	 * freopenStderr("/mnt/sdcard/log/stderr.txt", "w");
+	 * @param filePath
+	 * @param mode
+	 * @return
+	 */
+	private static native int freopenStderr(String filePath, String mode);
 	
 	//load library
 	static {

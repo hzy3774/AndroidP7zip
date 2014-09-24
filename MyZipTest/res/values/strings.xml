@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyZipTest</string>
+    <string name="app_name">AndroidP7zip</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="progress_title">Tip</string>
+    <string name="progress_title">Message</string>
     <string name="progress_message">Please wait...</string>
+    <string name="msg_ret_success">Success</string>
+    <string name="msg_ret_warning">Warning (Non fatal error(s))</string>
+    <string name="msg_ret_fault">Fatal error </string>
+    <string name="msg_ret_command">Command line error</string>
+    <string name="msg_ret_memmory">Not enough memory for operation</string>
+    <string name="msg_ret_user_stop">User stopped the process</string>
 
 </resources>
