@@ -2,82 +2,33 @@ package com.hu.p7zip;
 
 public class ZipUtils {
 	
-	private static final String EXE_NAME = "7z";
-	
-	/*  commands:
- 		a Add 
-		b Benchmark 
-		d Delete 
-		e Extract 
-		l List 
-		t Test 
-		u Update 
-		x eXtract with full paths 
+	/**
+	 * redirect stdout to a stream
+	 * @param filePath
+	 * @return
 	 */
-	private static final char CMD_ADD = 'a';
-	private static final char CMD_DELETE = 'd';
-	private static final char CMD_EXTRACT = 'e';
-	private static final char CMD_UPDATE = 'u';
-	private static final char CMD_EXTRACT_FULL = 'x';
+	public static int freopenStdout(String filePath){
+		return freopenStdout(filePath, "w+");
+	}
 	
-	/*
-		Switch Description
-		-- Stop switches parsing 
-		-ai Include archive filenames 
-		-an Disable parsing of archive_name 
-		-ao Overwrite mode 
-		-ax Exclude archive filenames 
-		-i Include filenames 
-		-m Set Compression Method 
-		-o Set Output directory 
-		-p Set Password 
-		-r Recurse subdirectories 
-		-scs Set charset for list files 
-		-slp Set Large Pages mode 
-		-slt Show technical information 
-		-sfx Create SFX archive 
-		-si Read data from StdIn 
-		-so Write data to StdOut 
-		-ssc Set Sensitive Case mode 
-		-t Type of archive 
-		-u Update options 
-		-v Create Volumes 
-		-w Set Working directory 
-		-x Exclude filenames 
-		-y Assume Yes on all queries 
-	*/
-	private static final String SWH_OUT_DIRECTORY = "-o";
-	private static final String SWH_SET_PASSWORD = "-p";
-	private static final String SWH_SET_COMPRESS_METHOD = "-m";
-	private static final String SWH_RECURES_SUBDIRECTORIES = "-r";
-	private static final String SWH_SET_CASE_SENSITIVE_MODE = "-ssc";
-	private static final String SWH_TYPE_OF_ARCHIVE = "-t";
-	private static final String SWH_UPDATE_OPTIONS = "-u";
-	private static final String SWH_CREATE_VOLUMES = "-v";
-	private static final String SWH_SET_WORKING_DIR = "-w";
-	private static final String SWH_YES_TO_ALL = "-y";
-	private static final String SWH_INCLUDE_FILE_NAMES = "-i";
-	private static final String SWH_EXCLUDE_FILE_NAMES = "-x";
-	
+	/**
+	 * redirect stderr to a stream
+	 * @param filePath
+	 * @return
+	 */
+	public static int freopenStderr(String filePath){
+		return freopenStderr(filePath, "w+");
+	}
 
-	
-	public static int command(String cmd)
-	{
-		return ZipUtils.executeCommand(cmd);
-	}
-	
-	public static int extractAll(String filePath, String outPath){
-		StringBuilder builder = new StringBuilder(EXE_NAME);
-		builder.append(" " + CMD_EXTRACT + " " + filePath + " ");
-		builder.append(SWH_OUT_DIRECTORY + outPath);
-		return ZipUtils.executeCommand(builder.toString());
-	}
-	
-	
 	/**
 	 * native interface
 	 */
-	private static native int executeCommand(String command);
+	/**
+	 * Execute a command
+	 * @param command command string
+	 * @return return code
+	 */
+	public static native int executeCommand(String command);
 	
 	/**
 	 * redirect stdout to a stream, default android stdout do nothing
@@ -86,7 +37,7 @@ public class ZipUtils {
 	 * @param mode often w+
 	 * @return
 	 */
-	private static native int freopenStdout(String filePath, String mode);
+	public static native int freopenStdout(String filePath, String mode);
 	
 	/**
 	 * redirect stderr to a stream, default android stderr do nothing
@@ -95,7 +46,7 @@ public class ZipUtils {
 	 * @param mode
 	 * @return
 	 */
-	private static native int freopenStderr(String filePath, String mode);
+	public static native int freopenStderr(String filePath, String mode);
 	
 	//load library
 	static {

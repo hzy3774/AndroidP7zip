@@ -98,7 +98,7 @@ public class ZipProcess {
 		int ret = 0;
 		switch (this.type) {
 		case TYPE_COMMAND:
-			ret = ZipUtils.command(args[0]);
+			ret = ZipUtils.executeCommand(args[0]);
 			break;
 
 		default:
