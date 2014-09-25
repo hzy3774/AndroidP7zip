@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp" >
+
+    <ImageView
+        android:id="@+id/fcFileIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="file_icon"
+        android:src="@android:drawable/sym_def_app_icon" />
+
+    <CheckBox
+        android:id="@+id/fcChooseFlag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/fcFileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fcFileIcon"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_toRightOf="@+id/fcFileIcon"
+        android:text="File name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/fcFileInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fcFileName"
+        android:layout_below="@+id/fcFileName"
+        android:layout_marginTop="7dp"
+        android:text="File info"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>
