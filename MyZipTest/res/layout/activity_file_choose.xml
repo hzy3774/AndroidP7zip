@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <TextView
+    <TextView
         android:id="@+id/fcFilePath"
-        android:layout_width="wrap_content"
+        android:singleLine="true"
+        android:background="#66666666"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="/mnt/sdcard/"
+        android:ellipsize="start"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
