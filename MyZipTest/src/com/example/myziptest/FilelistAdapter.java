@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import com.example.myziptest.R.drawable;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,13 @@ class FileListAdapter extends BaseAdapter {
 	private ArrayList<File> files;
 	private boolean isRoot;
 	private LayoutInflater mInflater;
+	
+	private static final String[] fileExts = {
+		"7z", "cab", "iso", "rar", "tar", "zip"};
+	
+	private static final int[] fileIcons = {
+		drawable.icon_7z,drawable.icon_cab, drawable.icon_iso, 
+		drawable.icon_rar, drawable.icon_tar, drawable.icon_zip};
 
 	public FileListAdapter(Context context, ArrayList<File> files,
 			boolean isRoot) {
@@ -70,6 +79,19 @@ class FileListAdapter extends BaseAdapter {
 		}
 		return ret;
 	}
+	
+	private int getFileIconId(File file){
+		int id = R.drawable.icon_unknown;
+		String fileName = file.getName();
+		String fileExt = fileName.substring(fileName.lastIndexOf(".")+1);
+		for(int i = 0; i < fileExts.length; i++){
+			if (fileExt.endsWith(fileExts[i])) {
+				id = fileIcons[i];
+				break;
+			}
+		}
+		return id;
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -99,9 +121,9 @@ class FileListAdapter extends BaseAdapter {
 			viewHolder.fileInfo.setText(getFileInfoString(file));
 			if (file.isDirectory()) { // directories
 				viewHolder.fileIcon.setImageResource(R.drawable.icon_folder);
-				viewHolder.isChecked.setVisibility(View.VISIBLE);
+//				viewHolder.isChecked.setVisibility(View.VISIBLE);
 			} else { // files
-				viewHolder.fileIcon.setImageResource(R.drawable.icon_7z);
+				viewHolder.fileIcon.setImageResource(getFileIconId(file));
 			}
 		}
 		return convertView;
