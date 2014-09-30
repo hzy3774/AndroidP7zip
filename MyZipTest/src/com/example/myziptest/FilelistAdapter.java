@@ -111,10 +111,12 @@ class FileListAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+		//return parent
 		if (position == 0 && !isRoot) {
 			viewHolder.fileIcon.setImageResource(R.drawable.icon_folder);
 			viewHolder.fileName.setText("..");
 			viewHolder.fileInfo.setText("Parent folder");
+			viewHolder.isChecked.setVisibility(View.GONE);
 		} else {
 			File file = (File) getItem(position);
 			viewHolder.fileName.setText(file.getName());

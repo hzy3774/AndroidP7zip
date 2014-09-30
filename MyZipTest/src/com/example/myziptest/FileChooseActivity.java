@@ -11,6 +11,7 @@ import com.example.myziptest.R.id;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,10 +31,10 @@ public class FileChooseActivity extends Activity {
 	File currentDir = null;
 
 	// you can choose a directory
-	public static final int FILTER_DIR = 0x01;
-	// you can choose a file
+	public static final int FILTER_DIR = 0x1;
+	// you can choose a directory
 	public static final int FILTER_FILE = 0x10;
-	// you can choose more than one item
+	//multi choose
 	public static final int FILTER_MULTI = 0x100;
 
 	@Override
@@ -42,31 +43,34 @@ public class FileChooseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_file_choose);
 
-		Intent intent = getIntent();
-
 		tvFilePath = (TextView) findViewById(id.fcFilePath);
 		lvFileList = (ListView) findViewById(id.fcFileList);
 
 		files = new ArrayList<File>();
+		Intent intent = getIntent();
 
-		lvFileList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				File file = (File) adapter.getItem(position);
-				if (file.isDirectory()) {
-					showSubFiles();
-				}
-			}
-		});
-		showSubFiles("/sdcard/");
-	}
-
-	// show subfile list to the UI
-	private void showSubFiles(String dirPath) {
-		currentDir = new File(dirPath);
+		lvFileList.setOnItemClickListener(new OnFileItemClickListener());
+		//set start path
+		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+			currentDir = Environment.getExternalStorageDirectory();
+		}else{
+			currentDir = new File("/");
+		}
 		showSubFiles();
+	}
+	
+	//when file list item clicked
+	private class OnFileItemClickListener implements OnItemClickListener{
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			File file = (File) adapter.getItem(position);
+			if (file.isDirectory()) {
+				currentDir = file;
+				showSubFiles();
+			}
+		}
 	}
 
 	// show subfile list to the UI
@@ -108,7 +112,8 @@ public class FileChooseActivity extends Activity {
 			@Override
 			public int compare(File lhs, File rhs) {
 				// TODO Auto-generated method stub
-				if (lhs.isDirectory() && !rhs.isDirectory()) {	//directorys show first
+				//directorys show first
+				if (lhs.isDirectory() && !rhs.isDirectory()) {
 					return -1;
 				} else if (!lhs.isDirectory() && rhs.isDirectory()) {
 					return 1;
@@ -123,11 +128,13 @@ public class FileChooseActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			if(isRoot){
+			currentDir = currentDir.getParentFile();
+			if(currentDir == null){
 				this.finish();
 			}else{
-				
+				showSubFiles();
 			}
+			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
