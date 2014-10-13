@@ -11,15 +11,15 @@ such as rar, zip, tar, lzma.
 
 | Format      |    Compress | Extract  |
 | :-------- | :--------:| :--------: |
-|zip |¡Ì|¡Ì|
-|7z  |¡Ì|¡Ì|
-|tar |¡Ì|¡Ì|
-|rar | |¡Ì|
-|gzip| |¡Ì|
-|cab | |¡Ì|
-|iso | |¡Ì|
-|wim | |¡Ì|
-|chm | |¡Ì|
+|zip |âˆš|âˆš|
+|7z  |âˆš|âˆš|
+|tar |âˆš|âˆš|
+|rar | |âˆš|
+|gzip| |âˆš|
+|cab | |âˆš|
+|iso | |âˆš|
+|wim | |âˆš|
+|chm | |âˆš|
 
 
 ###Usage
