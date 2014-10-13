@@ -30,6 +30,9 @@ public class FileChooseActivity extends Activity {
 	boolean isRoot = false;
 	File currentDir = null;
 
+	public static final String STRING_FILTER = "filter_name";
+	public static final String STRING_RETURN = "return_string";
+	
 	// you can choose a directory
 	public static final int FILTER_DIR = 0x1;
 	// you can choose a directory
@@ -69,6 +72,11 @@ public class FileChooseActivity extends Activity {
 			if (file.isDirectory()) {
 				currentDir = file;
 				showSubFiles();
+			}else{
+				Intent intent = new Intent();
+				intent.putExtra(STRING_RETURN, file.getAbsolutePath());
+				setResult(RESULT_OK, intent);
+				finish();
 			}
 		}
 	}

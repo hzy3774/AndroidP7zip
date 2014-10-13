@@ -1,6 +1,7 @@
 package com.example.myziptest;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -20,6 +21,9 @@ public class DecompressActivity extends Activity {
 	CheckBox cbWildcard, cbPassword, cbShowPassword;
 	OnCheckedChangeListener onCheckboxListener = null;
 	OnClickListener onButtonClickListener = null;
+	
+	static final int REQUEST_CODE_SRC = 0;
+	static final int REQUEST_CODE_DST = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +52,10 @@ public class DecompressActivity extends Activity {
 				// TODO Auto-generated method stub
 				switch (v.getId()) {
 				case id.buttonDeSrc:
-					
+					startFileChooser(FileChooseActivity.FILTER_FILE, REQUEST_CODE_SRC);
 					break;
 				case id.buttonDeDst:
-					
+					startFileChooser(FileChooseActivity.FILTER_DIR, REQUEST_CODE_DST);
 					break;
 				case id.buttonDeExecute:
 					
@@ -97,4 +101,33 @@ public class DecompressActivity extends Activity {
 		cbShowPassword.setOnCheckedChangeListener(onCheckboxListener);
 		
 	}
+	
+	//open a file choose activity to choose file
+	private void startFileChooser(int filter, int requestCode){
+		Intent intent = new Intent(DecompressActivity.this, FileChooseActivity.class);
+		intent.putExtra(FileChooseActivity.STRING_FILTER, filter);
+		startActivityForResult(intent, requestCode);
+	}
+	
+	//get file chooser result
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if(data == null){
+			return;
+		}
+		String retStr = data.getStringExtra(FileChooseActivity.STRING_RETURN);
+		switch (requestCode) {
+		case REQUEST_CODE_SRC:
+			etSrc.setText(retStr);
+			break;
+		case REQUEST_CODE_DST:
+			etDst.setText(retStr);
+			break;
+		default:
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
 }
