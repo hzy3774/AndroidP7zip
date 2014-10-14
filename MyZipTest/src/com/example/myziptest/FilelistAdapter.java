@@ -4,15 +4,19 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.myziptest.R.drawable;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +25,7 @@ class FileListAdapter extends BaseAdapter {
 	private ArrayList<File> files;
 	private boolean isRoot;
 	private LayoutInflater mInflater;
+	private List<Boolean> mChecked;
 	
 	private static final String[] fileExts = {
 		"7z", "cab", "iso", "rar", "tar", "zip"};
@@ -34,6 +39,10 @@ class FileListAdapter extends BaseAdapter {
 		this.files = files;
 		this.isRoot = isRoot;
 		mInflater = LayoutInflater.from(context);
+		mChecked = new ArrayList<Boolean>();
+		for (int i = 0; i < files.size(); i++) {
+			mChecked.add(false);
+		}
 	}
 
 	@Override
@@ -123,11 +132,21 @@ class FileListAdapter extends BaseAdapter {
 			viewHolder.fileInfo.setText(getFileInfoString(file));
 			if (file.isDirectory()) { // directories
 				viewHolder.fileIcon.setImageResource(R.drawable.icon_folder);
-//				viewHolder.isChecked.setVisibility(View.VISIBLE);
+				viewHolder.isChecked.setVisibility(View.VISIBLE);
 			} else { // files
 				viewHolder.fileIcon.setImageResource(getFileIconId(file));
 			}
 		}
+		//to set listen the checkbox
+		final int p = position;
+		viewHolder.isChecked.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				Log.i("ok", "changed" + p);
+				mChecked.set(p, isChecked);
+			}
+		});
 		return convertView;
 	}
 
