@@ -68,6 +68,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkBoxDeWildcard"
+            android:hint="Enter a wildcard"
             android:ems="10"
             android:singleLine="true"
             android:visibility="gone" />
@@ -97,6 +98,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkBoxDePasswd"
+            android:hint="Password"
             android:ems="10"
             android:inputType="textPassword"
             android:singleLine="true"

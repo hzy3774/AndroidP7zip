@@ -29,6 +29,9 @@ public class FileChooseActivity extends Activity {
 	
 	boolean isRoot = false;
 	File currentDir = null;
+	boolean chooseDir = false;
+	boolean chooseFile = false;
+	boolean chooseMulti = false;
 
 	public static final String STRING_FILTER = "filter_name";
 	public static final String STRING_RETURN = "return_string";
@@ -50,9 +53,16 @@ public class FileChooseActivity extends Activity {
 		lvFileList = (ListView) findViewById(id.fcFileList);
 
 		files = new ArrayList<File>();
+		
 		Intent intent = getIntent();
+		//get the filter
+		int filter = intent.getIntExtra(STRING_FILTER, FILTER_FILE);
+		chooseDir = (filter & FILTER_DIR) != 0;
+		chooseFile = (filter & FILTER_FILE) != 0;
+		chooseMulti = (filter & FILTER_MULTI) != 0;
 
-		lvFileList.setOnItemClickListener(new OnFileItemClickListener());
+		OnFileItemClickListener itemListener = new OnFileItemClickListener();
+		lvFileList.setOnItemClickListener(itemListener);
 		//set start path
 		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
 			currentDir = Environment.getExternalStorageDirectory();

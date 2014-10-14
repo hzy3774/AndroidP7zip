@@ -3,26 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <TextView
+
+    <TextView
         android:id="@+id/fcFilePath"
-        android:singleLine="true"
-        android:background="#66666666"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="/mnt/sdcard/"
+        android:background="#66666666"
         android:ellipsize="start"
+        android:singleLine="true"
+        android:text="/mnt/sdcard/"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:id="@+id/fcFileList"
-        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayoutFcBottom"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/fcFilePath"
+        android:layout_marginTop="2dp"
         tools:listitem="@layout/file_list_item" >
     </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutFcBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/buttonFcDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Done" />
+
+        <Button
+            android:id="@+id/buttonFcCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+    </LinearLayout>
 
 </RelativeLayout>
