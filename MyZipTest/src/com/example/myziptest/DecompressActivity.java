@@ -22,6 +22,9 @@ public class DecompressActivity extends Activity {
 	OnCheckedChangeListener onCheckboxListener = null;
 	OnClickListener onButtonClickListener = null;
 	
+	boolean isWildcard = false;
+	boolean isPassword = false;
+	
 	static final int REQUEST_CODE_SRC = 0;
 	static final int REQUEST_CODE_DST = 1;
 
@@ -74,10 +77,14 @@ public class DecompressActivity extends Activity {
 				switch (buttonView.getId()) {
 				case id.checkBoxDeWildcard:
 					etWildcard.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+					etWildcard.requestFocus();
+					isWildcard = isChecked;
 					break;
 				case id.checkBoxDePasswd:
 					etPassword.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+					etPassword.requestFocus();
 					cbShowPassword.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+					isPassword = isChecked;
 					break;
 				case id.checkBoxDePwdVisible:
 					int pwdType = isChecked ? InputType.TYPE_CLASS_TEXT
@@ -119,10 +126,14 @@ public class DecompressActivity extends Activity {
 		String retStr = data.getStringExtra(FileChooseActivity.STRING_RETURN);
 		switch (requestCode) {
 		case REQUEST_CODE_SRC:
+			etSrc.requestFocus();
 			etSrc.setText(retStr);
+			etSrc.selectAll();
 			break;
 		case REQUEST_CODE_DST:
+			etDst.requestFocus();
 			etDst.setText(retStr);
+			etDst.selectAll();
 			break;
 		default:
 			break;

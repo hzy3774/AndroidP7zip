@@ -24,6 +24,7 @@ class FileListAdapter extends BaseAdapter {
 
 	private ArrayList<File> files;
 	private boolean isRoot;
+	private boolean isMulti;
 	private LayoutInflater mInflater;
 	private List<Boolean> mChecked;
 	
@@ -35,13 +36,18 @@ class FileListAdapter extends BaseAdapter {
 		drawable.icon_rar, drawable.icon_tar, drawable.icon_zip};
 
 	public FileListAdapter(Context context, ArrayList<File> files,
-			boolean isRoot) {
+			boolean isRoot, boolean isMulti) {
 		this.files = files;
 		this.isRoot = isRoot;
+		this.isMulti = isMulti;
 		mInflater = LayoutInflater.from(context);
-		mChecked = new ArrayList<Boolean>();
-		for (int i = 0; i < files.size(); i++) {
-			mChecked.add(false);
+		
+		//init the checked flag with all false
+		if(isMulti){
+			mChecked = new ArrayList<Boolean>();
+			for (int i = 0; i < files.size(); i++) {
+				mChecked.add(false);
+			}
 		}
 	}
 
@@ -132,22 +138,29 @@ class FileListAdapter extends BaseAdapter {
 			viewHolder.fileInfo.setText(getFileInfoString(file));
 			if (file.isDirectory()) { // directories
 				viewHolder.fileIcon.setImageResource(R.drawable.icon_folder);
-				viewHolder.isChecked.setVisibility(View.VISIBLE);
+				viewHolder.isChecked.setVisibility(isMulti?View.VISIBLE:View.GONE);
 			} else { // files
 				viewHolder.fileIcon.setImageResource(getFileIconId(file));
+				viewHolder.isChecked.setVisibility(isMulti?View.VISIBLE:View.GONE);
 			}
 		}
 		//to set listen the checkbox
-		final int p = position;
-		viewHolder.isChecked.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
-				Log.i("ok", "changed" + p);
-				mChecked.set(p, isChecked);
-			}
-		});
+		if (isMulti){
+			final int p = position;
+			viewHolder.isChecked.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					Log.d("file chooser", "checkbox " + p + isChecked);
+					mChecked.set(p, isChecked);
+				}
+			});
+		}
 		return convertView;
+	}
+	
+	public List<Boolean> getCheckedIndexList(){
+		return mChecked;
 	}
 
 	class ViewHolder {

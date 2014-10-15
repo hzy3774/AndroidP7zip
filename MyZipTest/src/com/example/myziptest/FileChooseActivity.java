@@ -6,23 +6,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.example.myziptest.R.id;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.myziptest.R.id;
 
 public class FileChooseActivity extends Activity {
 
 	TextView tvFilePath = null;
 	ListView lvFileList = null;
+	LinearLayout llBottom = null;
+	Button btDone = null;
+	Button btCancel = null;
 
 	ArrayList<File> files = null;
 	FileListAdapter adapter = null;
@@ -51,6 +57,9 @@ public class FileChooseActivity extends Activity {
 
 		tvFilePath = (TextView) findViewById(id.fcFilePath);
 		lvFileList = (ListView) findViewById(id.fcFileList);
+		llBottom = (LinearLayout) findViewById(id.linearLayoutFcBottom);
+		btDone = (Button) findViewById(id.buttonFcDone);
+		btCancel = (Button) findViewById(id.buttonFcCancel);
 
 		files = new ArrayList<File>();
 		
@@ -60,9 +69,18 @@ public class FileChooseActivity extends Activity {
 		chooseDir = (filter & FILTER_DIR) != 0;
 		chooseFile = (filter & FILTER_FILE) != 0;
 		chooseMulti = (filter & FILTER_MULTI) != 0;
+		//wether need to show bottom controls
+		if(chooseDir || chooseMulti){
+			llBottom.setVisibility(View.VISIBLE);
+		}
 
+		//set listeners
 		OnFileItemClickListener itemListener = new OnFileItemClickListener();
+		OnFcButtonClickListener buttonListener = new OnFcButtonClickListener();
 		lvFileList.setOnItemClickListener(itemListener);
+		btDone.setOnClickListener(buttonListener);
+		btCancel.setOnClickListener(buttonListener);
+		
 		//set start path
 		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
 			currentDir = Environment.getExternalStorageDirectory();
@@ -90,6 +108,32 @@ public class FileChooseActivity extends Activity {
 			}
 		}
 	}
+	
+	//when button clicked
+	private class OnFcButtonClickListener implements OnClickListener{
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch (v.getId()) {
+			case id.buttonFcDone:
+				if(chooseMulti){
+					
+				}else{
+					//return current path
+					Intent intent = new Intent();
+					intent.putExtra(STRING_RETURN, currentDir.getAbsolutePath());
+					setResult(RESULT_OK, intent);
+					finish();
+				}
+				break;
+			case id.buttonFcCancel:
+				finish();
+				break;
+			default:
+				break;
+			}
+		}
+	}
 
 	// show subfile list to the UI
 	private void showSubFiles() {
@@ -104,7 +148,7 @@ public class FileChooseActivity extends Activity {
 		if (!isRoot) { // father directory
 			files.add(0, currentDir.getParentFile());
 		}
-		adapter = new FileListAdapter(this, files, isRoot);
+		adapter = new FileListAdapter(this, files, isRoot, chooseMulti);
 		lvFileList.setAdapter(adapter);
 	}
 
@@ -114,7 +158,11 @@ public class FileChooseActivity extends Activity {
 			@Override
 			public boolean accept(File pathname) {
 				// TODO Auto-generated method stub
-				return true;
+				if(!pathname.isDirectory() && !chooseFile){
+					return false;
+				}else{
+					return true;
+				}
 			}
 		});
 		if (null != fileArray && fileArray.length > 0) {
