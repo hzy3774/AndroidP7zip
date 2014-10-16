@@ -68,8 +68,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkBoxDeWildcard"
-            android:hint="Enter a wildcard"
             android:ems="10"
+            android:hint="Enter a wildcard"
             android:singleLine="true"
             android:visibility="gone" />
 
@@ -81,7 +81,7 @@
             android:layout_below="@+id/editTextDeWildcard"
             android:checked="false"
             android:text="Password" />
-        
+
         <CheckBox
             android:id="@+id/checkBoxDePwdVisible"
             android:layout_width="wrap_content"
@@ -98,11 +98,36 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkBoxDePasswd"
-            android:hint="Password"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword"
             android:singleLine="true"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textViewDeOverMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTextDePasswd"
+            android:layout_marginTop="16dp"
+            android:text="Overwrite mode:" />
+
+        <Spinner
+            android:id="@+id/spinnerDeOverwrite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textViewDeOverMode"
+            android:entries="@array/array_overwrite_mode" />
+
+        <CheckBox
+            android:id="@+id/checkBoxDeFilesOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinnerDeOverwrite"
+            android:text="Files only(Ignore directories)" />
 
         <Button
             android:id="@+id/buttonDeExecute"
@@ -110,10 +135,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextDePasswd"
+            android:layout_below="@+id/checkBoxDeFilesOnly"
             android:text="Execute" />
-
-
     </RelativeLayout>
 
 </ScrollView>

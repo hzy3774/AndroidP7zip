@@ -11,5 +11,11 @@
     <string name="msg_ret_command">Command line error</string>
     <string name="msg_ret_memmory">Not enough memory for operation</string>
     <string name="msg_ret_user_stop">User stopped the process</string>
+    <string-array name="array_overwrite_mode">
+        <item >Overwrite existing file</item>
+        <item >Skip existing file</item>
+        <item >Rename extracting file</item>
+        <item >Rename existing file</item>
+    </string-array>
 
 </resources>
