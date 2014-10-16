@@ -61,7 +61,16 @@ public class DecompressActivity extends Activity {
 					startFileChooser(FileChooseActivity.FILTER_DIR, REQUEST_CODE_DST);
 					break;
 				case id.buttonDeExecute:
-					
+					StringBuilder sbCmd = new StringBuilder("7z x ");
+					sbCmd.append("'" + etSrc.getText().toString() + "' ");	//7z x 'aaa/bbb.zip'
+					sbCmd.append("'-o" + etDst.getText().toString() + "' ");	//7z x 'a.zip' '-o/out/'
+					if(isWildcard){
+						sbCmd.append("'" + etWildcard.getText().toString() + "' ");	//7z x 'a.zip' '-o/out/' '*.txt'
+					}
+					if(isPassword){
+						sbCmd.append("'-p" + etPassword.getText().toString() + "' ");	//7z x 'a.zip' '-o/out/' '*.txt' -ppwd
+					}
+					new ZipProcess(DecompressActivity.this, sbCmd.toString()).start();
 					break;
 				default:
 					break;

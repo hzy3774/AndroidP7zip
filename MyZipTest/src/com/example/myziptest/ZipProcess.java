@@ -10,10 +10,6 @@ import android.widget.Toast;
 
 public class ZipProcess {
 	
-	
-	public static final int TYPE_NULL = 0;
-	public static final int TYPE_COMMAND = 1;
-	
 	/*
 		0 No error 
 		1 Warning (Non fatal error(s)). For example, one or more files were locked by some other application,
@@ -34,14 +30,12 @@ public class ZipProcess {
 	Thread thread = null;
 	ProgressDialog dialog = null;
 	Handler handler = null;
-	int type = 0;
-	String[] args = null;
+	String command = null;
 	
-	public ZipProcess(Context context, int type, String[] args) {
+	public ZipProcess(Context context, String command) {
 		// TODO Auto-generated method stub
 		this.context = context;
-		this.type = type;
-		this.args = args;
+		this.command = command;
 		
 		dialog = new ProgressDialog(context);
 		dialog.setTitle(R.string.progress_title);
@@ -87,24 +81,11 @@ public class ZipProcess {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				int ret = allProcess();
+				int ret = ZipUtils.executeCommand(ZipProcess.this.command);
 				handler.sendEmptyMessage(ret);	//send back return code
 				super.run();
 			}
 		};
-	}
-	
-	private int allProcess() {
-		int ret = 0;
-		switch (this.type) {
-		case TYPE_COMMAND:
-			ret = ZipUtils.executeCommand(args[0]);
-			break;
-
-		default:
-			break;
-		}
-		return ret;
 	}
 	
 	void start(){
