@@ -1,34 +1,144 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <Button
-        android:id="@+id/buttonCmdExecute"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="Execute" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <EditText
-        android:id="@+id/editTextCommand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonCmdExecute"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:gravity="left|top"
-        android:hint="Enter the command..."
-        android:inputType="textMultiLine" >
+        <EditText
+            android:id="@+id/editTextCoSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/buttonCoSrc"
+            android:ems="10"
+            android:hint="Source files"
+            android:singleLine="true" >
 
-        <requestFocus />
-    </EditText>
+            <requestFocus />
+        </EditText>
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/buttonCoSrc"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="..." />
+
+        <EditText
+            android:id="@+id/editTextCoDstPath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/buttonCoSrc"
+            android:layout_toLeftOf="@+id/buttonCoDstPath"
+            android:ems="10"
+            android:hint="Achieve output path"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/buttonCoDstPath"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/buttonCoSrc"
+            android:text="..." />
+
+        <EditText
+            android:id="@+id/editTextCoAchieveName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/buttonCoDstPath"
+            android:ems="10"
+            android:hint="Achieve name"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/textViewCoType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTextCoAchieveName"
+            android:text="Type of archive:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/spinnerCoType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextCoAchieveName"
+            android:layout_toRightOf="@+id/textViewCoType"
+            android:entries="@array/array_compress_type" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCoWildcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinnerCoType"
+            android:checked="false"
+            android:text="Wildcard/File name" />
+
+        <EditText
+            android:id="@+id/editTextCoWildcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/checkBoxCoWildcard"
+            android:ems="10"
+            android:hint="Enter a wildcard"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCoPasswd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTextCoWildcard"
+            android:checked="false"
+            android:text="Password" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCoPwdVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextCoWildcard"
+            android:text="ShowPassword"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editTextCoPasswd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/checkBoxCoPasswd"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/buttonCoExecute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextCoPasswd"
+            android:text="Execute" />
+    </RelativeLayout>
+
+</ScrollView>

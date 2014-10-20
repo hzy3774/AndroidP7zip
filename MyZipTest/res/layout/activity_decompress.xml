@@ -119,7 +119,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textViewDeOverMode"
-            android:entries="@array/array_overwrite_mode" />
+            android:entries="@array/array_overwrite_mode"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <CheckBox
             android:id="@+id/checkBoxDeFilesOnly"

@@ -17,5 +17,11 @@
         <item >Rename extracting file</item>
         <item >Rename existing file</item>
     </string-array>
+        <string-array name="array_compress_type">
+        <item >zip</item>
+        <item >7z</item>
+        <item >iso</item>
+        <item >tar</item>
+    </string-array>
 
 </resources>
