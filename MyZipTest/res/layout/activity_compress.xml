@@ -19,7 +19,7 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/buttonCoSrc"
             android:ems="10"
-            android:hint="Source files"
+            android:hint="Source files/Wildcard"
             android:singleLine="true" >
 
             <requestFocus />
@@ -52,60 +52,39 @@
             android:layout_below="@+id/buttonCoSrc"
             android:text="..." />
 
-        <EditText
-            android:id="@+id/editTextCoAchieveName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/buttonCoDstPath"
-            android:ems="10"
-            android:hint="Achieve name"
-            android:singleLine="true" />
-
-        <TextView
-            android:id="@+id/textViewCoType"
+        <CheckBox
+            android:id="@+id/checkBoxCoType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editTextCoAchieveName"
-            android:text="Type of archive:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_below="@+id/editTextCoDstPath"
+            android:text="Specify type" />
 
         <Spinner
             android:id="@+id/spinnerCoType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editTextCoAchieveName"
-            android:layout_toRightOf="@+id/textViewCoType"
+            android:layout_below="@+id/editTextCoDstPath"
+            android:layout_toRightOf="@+id/checkBoxCoType"
+			android:visibility="invisible"
             android:entries="@array/array_compress_type" />
 
-        <CheckBox
-            android:id="@+id/checkBoxCoWildcard"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextCoAchieveName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/spinnerCoType"
-            android:checked="false"
-            android:text="Wildcard/File name" />
-
-        <EditText
-            android:id="@+id/editTextCoWildcard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/checkBoxCoWildcard"
             android:ems="10"
-            android:hint="Enter a wildcard"
-            android:singleLine="true"
-            android:visibility="gone" />
+            android:hint="Achieve name"
+            android:singleLine="true" />
 
         <CheckBox
             android:id="@+id/checkBoxCoPasswd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editTextCoWildcard"
+            android:layout_below="@+id/editTextCoAchieveName"
             android:checked="false"
             android:text="Password" />
 
@@ -114,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextCoWildcard"
+            android:layout_below="@+id/editTextCoAchieveName"
             android:text="ShowPassword"
             android:visibility="gone" />
 

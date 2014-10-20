@@ -5,6 +5,7 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -116,15 +117,28 @@ public class FileChooseActivity extends Activity {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case id.buttonFcDone:
+				Intent intent = new Intent();
+				String retStr = null;
 				if(chooseMulti){
-					
+					//return selected paths/files
+					StringBuilder sbStr = new StringBuilder("");
+					List<Boolean> flags = adapter.getCheckedIndexList();
+					for(int i = 0; i < flags.size(); i++){
+						if(flags.get(i)){
+							sbStr.append(files.get(i) + "' '");
+						}
+					}
+					if(sbStr.length() > 3){
+						sbStr.setLength(sbStr.length() - 3);
+					}
+					retStr = sbStr.toString();
 				}else{
 					//return current path
-					Intent intent = new Intent();
-					intent.putExtra(STRING_RETURN, currentDir.getAbsolutePath());
-					setResult(RESULT_OK, intent);
-					finish();
+					retStr = currentDir.getAbsolutePath();
 				}
+				intent.putExtra(STRING_RETURN, retStr);
+				setResult(RESULT_OK, intent);
+				finish();
 				break;
 			case id.buttonFcCancel:
 				finish();

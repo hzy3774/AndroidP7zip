@@ -20,15 +20,15 @@ import android.widget.Spinner;
 
 public class CompressActivity  extends Activity{
 	
-	EditText etSrc, etDst, etFileName, etWildcard, etPassword;
+	EditText etSrc, etDst, etFileName, etPassword;
 	Button btSrc, btDst, btExecute;
-	CheckBox cbWildcard, cbPassword, cbShowPwd;
+	CheckBox cbPassword, cbShowPwd, cbType;
 	Spinner spType;
 	OnClickListener btClickListener;
 	OnCheckedChangeListener onCheckboxListener;
 	
-	boolean isWildcard = false;
 	boolean isPassword = false;
+	boolean isSpecifyType = false;
 	
 	String[] fileTypes; 
 	
@@ -44,16 +44,15 @@ public class CompressActivity  extends Activity{
 		etSrc = (EditText) findViewById(id.editTextCoSrc);
 		etDst = (EditText) findViewById(id.editTextCoDstPath);
 		etFileName = (EditText) findViewById(id.editTextCoAchieveName);
-		etWildcard = (EditText) findViewById(id.editTextCoWildcard);
 		etPassword = (EditText) findViewById(id.editTextCoPasswd);
 		//button
 		btSrc = (Button) findViewById(id.buttonCoSrc);
 		btDst = (Button) findViewById(id.buttonCoDstPath);
 		btExecute = (Button) findViewById(id.buttonCoExecute);
 		//checkbox
-		cbWildcard = (CheckBox) findViewById(id.checkBoxCoWildcard);
 		cbPassword = (CheckBox) findViewById(id.checkBoxCoPasswd);
 		cbShowPwd = (CheckBox) findViewById(id.checkBoxCoPwdVisible);
+		cbType = (CheckBox) findViewById(id.checkBoxCoType);
 		//spinner
 		spType = (Spinner) findViewById(id.spinnerCoType);
 		fileTypes = getResources().getStringArray(array.array_compress_type);
@@ -66,7 +65,7 @@ public class CompressActivity  extends Activity{
 				case id.buttonCoSrc:
 					startFileChooser(FileChooseActivity.FILTER_DIR | 
 							FileChooseActivity.FILTER_FILE | FileChooseActivity.FILTER_MULTI,
-							REQUEST_CODE_DST);
+							REQUEST_CODE_SRC);
 					break;
 				case id.buttonCoDstPath:
 					startFileChooser(FileChooseActivity.FILTER_DIR, REQUEST_CODE_DST);
@@ -85,11 +84,6 @@ public class CompressActivity  extends Activity{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
 				switch (buttonView.getId()) {
-				case id.checkBoxCoWildcard:
-					etWildcard.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-					etWildcard.requestFocus();
-					isWildcard = isChecked;
-					break;
 				case id.checkBoxCoPasswd:
 					etPassword.setVisibility(isChecked ? View.VISIBLE : View.GONE);
 					etPassword.requestFocus();
@@ -102,6 +96,10 @@ public class CompressActivity  extends Activity{
 					etPassword.setInputType(pwdType);
 					etPassword.selectAll();
 					break;
+				case id.checkBoxCoType:
+					isSpecifyType = isChecked;
+					spType.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
+					break;
 				default:
 					break;
 				}
@@ -113,9 +111,9 @@ public class CompressActivity  extends Activity{
 		btDst.setOnClickListener(btClickListener);
 		btExecute.setOnClickListener(btClickListener);
 		
-		cbWildcard.setOnCheckedChangeListener(onCheckboxListener);
 		cbPassword.setOnCheckedChangeListener(onCheckboxListener);
 		cbShowPwd.setOnCheckedChangeListener(onCheckboxListener);
+		cbType.setOnCheckedChangeListener(onCheckboxListener);
 	}
 	
 	//open a file choose activity to choose file
@@ -127,9 +125,14 @@ public class CompressActivity  extends Activity{
 	
 	private void compressProcess(){
 		StringBuilder sbCmd = new StringBuilder("7z a ");
-		sbCmd.append("-t" + fileTypes[spType.getSelectedItemPosition()] + " ");	//7z a -t7z
-		sbCmd.append("'" + etDst.getText() + File.separator + etFileName.getText() + "' "); //7z a -t7z '/hh.7z'
-		
+		if(isSpecifyType){
+			sbCmd.append("-t" + fileTypes[spType.getSelectedItemPosition()] + " ");	//7z a -t7z
+		}
+		sbCmd.append("'" + etDst.getText() + File.separator + etFileName.getText() + "' "); //7z a '/hh.7z'
+		sbCmd.append("'" + etSrc.getText() + "' "); //7z a '/hh.7z' '/paths'
+		if(isPassword){
+			sbCmd.append("'-p" + etPassword.getText().toString() + "' ");
+		}
 		new ZipProcess(CompressActivity.this, sbCmd.toString()).start();
 	}
 	
