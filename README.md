@@ -28,16 +28,15 @@ such as rar, zip, tar, lzma.
 2. if you don't want to compile the cpp code, just use the library.
 
 ####Demo screenshoot
-![image]()
-####JNI log
-![image]()
-####File manager
-![image]()
+#####1.Compress demo
+![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/images/compress_demo.gif)
+#####2.Extract demo
+![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/images/extract_demo.gif)
 
 ####simple code:
 * It's now just one single function to call:
 ```java
-    public static int myCmd(String cmd);
+    public static native int executeCommand(String command);
 ```
 ###More information
 * More about it http://p7zip.sourceforge.net/
