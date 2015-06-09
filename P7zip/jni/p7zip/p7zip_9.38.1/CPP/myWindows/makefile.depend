@@ -1,0 +1,63 @@
+myGetTickCount.o: myGetTickCount.cpp StdAfx.h config.h ../Common/Common.h \
+ ../Common/../../C/Compiler.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h ../Common/NewHandler.h \
+ ../Common/MyWindows.h ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h
+mySplitCommandLine.o: mySplitCommandLine.cpp StdAfx.h config.h \
+ ../Common/Common.h ../Common/../../C/Compiler.h ../Common/MyWindows.h \
+ ../Common/MyGuidDef.h ../Common/MyTypes.h ../Common/../../C/7zTypes.h \
+ ../Common/NewHandler.h ../Common/MyWindows.h ../Common/MyTypes.h \
+ ../include_windows/windows.h ../include_windows/basetyps.h \
+ ../include_windows/tchar.h ../Common/StringConvert.h \
+ ../Common/MyString.h ../Common/MyVector.h myPrivate.h
+myAddExeFlag.o: myAddExeFlag.cpp StdAfx.h config.h ../Common/Common.h \
+ ../Common/../../C/Compiler.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h ../Common/NewHandler.h \
+ ../Common/MyWindows.h ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h myPrivate.h \
+ ../Common/StringConvert.h ../Common/MyString.h ../Common/MyVector.h
+test_emul.o: test_emul.cpp StdAfx.h config.h ../Common/Common.h \
+ ../Common/../../C/Compiler.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h ../Common/NewHandler.h \
+ ../Common/MyWindows.h ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h \
+ ../Common/StringConvert.h ../Common/MyString.h ../Common/MyVector.h \
+ ../Common/StdOutStream.h ../Common/StringConvert.cpp StdAfx.h \
+ ../Common/StringConvert.h ../Common/StdOutStream.cpp \
+ ../Common/IntToString.h ../Common/StdOutStream.h ../Common/UTFConvert.h \
+ ../Common/IntToString.cpp ../Common/UTFConvert.cpp \
+ ../Windows/Synchronization.cpp ../Windows/Synchronization.h \
+ ../Windows/Defs.h ../Windows/../Common/MyWindows.h \
+ ../Windows/../../C/Threads.h ../Windows/../../C/7zTypes.h \
+ ../Windows/Synchronization2.h ../Windows/FileFind.cpp \
+ ../Windows/FileFind.h ../Windows/../Common/MyString.h \
+ ../Windows/../Common/MyTypes.h ../Windows/FileIO.h ../Common/MyString.h \
+ ../Windows/../Common/StringConvert.h myPrivate.h \
+ ../Windows/TimeUtils.cpp ../Windows/TimeUtils.h ../../C/Threads.c \
+ ../../C/Threads.h ../../C/Ppmd.h ../../C/CpuArch.h ../../C/7zTypes.h
+wine_date_and_time.o: wine_date_and_time.cpp config.h \
+ ../include_windows/windows.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h \
+ ../include_windows/basetyps.h
+wine_GetXXXDefaultLangID.o: wine_GetXXXDefaultLangID.cpp StdAfx.h \
+ config.h ../Common/Common.h ../Common/../../C/Compiler.h \
+ ../Common/MyWindows.h ../Common/MyGuidDef.h ../Common/MyTypes.h \
+ ../Common/../../C/7zTypes.h ../Common/NewHandler.h ../Common/MyWindows.h \
+ ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h
+MyVector.o: ../Common/MyVector.cpp StdAfx.h config.h ../Common/Common.h \
+ ../Common/../../C/Compiler.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h ../Common/NewHandler.h \
+ ../Common/MyWindows.h ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h
+MyString.o: ../Common/MyString.cpp StdAfx.h config.h ../Common/Common.h \
+ ../Common/../../C/Compiler.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h ../Common/NewHandler.h \
+ ../Common/MyWindows.h ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h \
+ ../Common/StringConvert.h ../Common/MyString.h ../Common/MyVector.h
+MyWindows.o: ../Common/MyWindows.cpp StdAfx.h config.h ../Common/Common.h \
+ ../Common/../../C/Compiler.h ../Common/MyWindows.h ../Common/MyGuidDef.h \
+ ../Common/MyTypes.h ../Common/../../C/7zTypes.h ../Common/NewHandler.h \
+ ../Common/MyWindows.h ../Common/MyTypes.h ../include_windows/windows.h \
+ ../include_windows/basetyps.h ../include_windows/tchar.h
