@@ -7,7 +7,7 @@ such as rar, zip, tar, lzma.
 
 * p7zip is a integrated open source C/C++ library, this project use jni call the library.
 
-###Popular format support
+### Popular format support
 
 | Format      |    Compress | Extract  |
 | :-------- | :--------:| :--------: |
@@ -22,31 +22,31 @@ such as rar, zip, tar, lzma.
 |chm | |√|
 
 
-###Usage
+### Usage
 
 1. You can download all the demo source code and compile it.<br>
 2. if you don't want to compile the cpp code, just use the library.
 
-####Demo screenshoot
-#####1.Compress demo
+#### Demo screenshoot
+##### 1.Compress demo
 ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/images/compress_demo.gif)
-#####2.Extract demo
+##### 2.Extract demo
 ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/images/extract_demo.gif)
 
-####simple code:
+#### simple code:
 * It's now just one single function to call:
 ```java
     public static native int executeCommand(String command);
 ```
-###More information
+### More information
 * More about it http://p7zip.sourceforge.net/
 
-###About me
+### About me
 * [ITeye blog: http://hzy3774.iteye.com/](http://hzy3774.iteye.com/)
 * [Baidu blog: http://hi.baidu.com/hzyws](http://hi.baidu.com/hzyws)
 * [Sina weibo: http://weibo.com/hzy3774](http://weibo.com/hzy3774)
 
-###Contact to me
+### Contact to me
 * QQ: [377406997](http://wpa.qq.com/msgrd?v=3&uin=377406997&site=qq&menu=yes)
 * Email: [hzy3774@qq.com](mailto:hzy3774@qq.com)
 
