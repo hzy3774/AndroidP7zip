@@ -1,22 +1,45 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.model.library'
 
-android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+model {
+    android {
+        compileSdkVersion 26
+        buildToolsVersion "26.0.0"
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        defaultConfig {
+            minSdkVersion.apiLevel 15
+            targetSdkVersion.apiLevel 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            moduleName "p7zip"
+            CFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
+            CFlags.add('-I' + file("src/main/jni/p7zip/CPP/myWindows"))
+            CFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
+            cppFlags.add('-I' + file("src/main/jni"))
+            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
+            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
+            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/myWindows"))
 
+            cppFlags.addAll(["-DANDROID_NDK","-fexceptions","-DNDEBUG","-D_REENTRANT","-DENV_UNIX",
+                             "-DEXTERNAL_CODECS","-DBREAK_HANDLER","-DUNICODE","-D_UNICODE",
+                             "-DUNIX_USE_WIN_FILE","-fPIE"])
+            ldLibs.addAll(["log"])
+            stl "c++_static"
+            abiFilters.addAll(['armeabi', 'armeabi-v7a'])
+        }
     }
-    buildTypes {
+    android.buildTypes {
+        debug {
+            ndk {
+                cppFlags.add('-DNDK_DEBUG')
+            }
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles.add(file('proguard-rules.pro'))
         }
     }
 }
@@ -26,6 +49,5 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
 }
