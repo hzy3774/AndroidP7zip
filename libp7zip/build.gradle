@@ -16,19 +16,19 @@ model {
         ndk {
             moduleName "p7zip"
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
-            CFlags.add('-I' + file("src/main/jni/p7zip/CPP/myWindows"))
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
             cppFlags.add('-I' + file("src/main/jni"))
             cppFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
             cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
             cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/myWindows"))
 
-            cppFlags.addAll(["-DANDROID_NDK","-fexceptions","-DNDEBUG","-D_REENTRANT","-DENV_UNIX",
-                             "-DEXTERNAL_CODECS","-DBREAK_HANDLER","-DUNICODE","-D_UNICODE",
-                             "-DUNIX_USE_WIN_FILE","-fPIE"])
+            cppFlags.addAll(["-DANDROID_NDK", "-fexceptions", "-DNDEBUG", "-D_REENTRANT",
+                             "-DENV_UNIX", "-DBREAK_HANDLER", "-DUNICODE", "-D_UNICODE",
+                             "-DUNIX_USE_WIN_FILE", "-fPIC"])
             ldLibs.addAll(["log"])
             stl "c++_static"
-            abiFilters.addAll(['armeabi', 'armeabi-v7a'])
+            abiFilters.addAll(['armeabi-v7a'])
+            //abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
         }
     }
     android.buildTypes {
