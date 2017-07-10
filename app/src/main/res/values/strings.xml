@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">AndroidP7Zip</string>
+    <string name="app_name">P7Zip</string>
+    <string name="title_activity_main">P7Zip</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="settings">Settings</string>
+    <string name="sd_card">SD card</string>
+    <string name="mobile_phone">Mobile Phone</string>
+    <string name="home">Home</string>
+    <string name="about">About</string>
 </resources>

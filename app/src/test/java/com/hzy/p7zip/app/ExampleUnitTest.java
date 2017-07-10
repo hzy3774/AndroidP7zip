@@ -1,4 +1,4 @@
-package com.hzy.p7zip.demo;
+package com.hzy.p7zip.app;
 
 import org.junit.Test;
 

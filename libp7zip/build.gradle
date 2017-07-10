@@ -2,12 +2,12 @@ apply plugin: 'com.android.model.library'
 
 model {
     android {
-        compileSdkVersion 26
+        compileSdkVersion 25
         buildToolsVersion "26.0.0"
 
         defaultConfig {
             minSdkVersion.apiLevel 15
-            targetSdkVersion.apiLevel 26
+            targetSdkVersion.apiLevel 25
             versionCode 1
             versionName "1.0"
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,6 +19,7 @@ model {
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
             cppFlags.add('-I' + file("src/main/jni"))
             cppFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
+            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/Common"))
             cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
             cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/myWindows"))
 
@@ -27,7 +28,7 @@ model {
                              "-DUNIX_USE_WIN_FILE", "-fPIC"])
             ldLibs.addAll(["log"])
             stl "c++_static"
-            abiFilters.addAll(['armeabi-v7a'])
+            abiFilters.addAll(['armeabi'])
             //abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
         }
     }
