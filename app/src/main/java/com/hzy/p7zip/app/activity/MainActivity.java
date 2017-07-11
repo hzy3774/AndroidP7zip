@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.hzy.p7zip.app.R;
 import com.hzy.p7zip.app.fragment.AboutFragment;
+import com.hzy.p7zip.app.fragment.HelpFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,19 +69,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        drawer.closeDrawer(GravityCompat.START);
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_home:
                 break;
-            case R.id.nav_sd_card:
+            case R.id.nav_storage:
                 break;
             case R.id.nav_help:
+                showFragment(HelpFragment.class);
                 break;
             case R.id.nav_about:
                 showFragment(AboutFragment.class);
                 break;
         }
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
         mFragment = newFragment;
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
 }

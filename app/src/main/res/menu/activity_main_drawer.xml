@@ -6,14 +6,14 @@
             android:id="@+id/nav_home"
             android:title="@string/home" />
        <item
-            android:id="@+id/nav_sd_card"
-            android:title="@string/sd_card" />
+            android:id="@+id/nav_storage"
+            android:title="@string/storage" />
         <item
             android:id="@+id/nav_config"
             android:title="@string/settings" />
         <item
             android:id="@+id/nav_help"
-            android:title="@string/settings" />
+            android:title="@string/help" />
         <item
             android:id="@+id/nav_about"
             android:title="@string/about" />

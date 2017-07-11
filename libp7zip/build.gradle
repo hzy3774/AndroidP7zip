@@ -27,7 +27,7 @@ model {
                              "-DENV_UNIX", "-DBREAK_HANDLER", "-DUNICODE", "-D_UNICODE",
                              "-DUNIX_USE_WIN_FILE", "-fPIC"])
             ldLibs.addAll(["log"])
-            stl "c++_static"
+            stl "gnustl_static"
             abiFilters.addAll(['armeabi'])
             //abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
         }

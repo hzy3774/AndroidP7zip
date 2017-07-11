@@ -1,6 +1,10 @@
 #ifndef ANDROIDUN7ZIP_NDKHELPER_H
 #define ANDROIDUN7ZIP_NDKHELPER_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <jni.h>
 
 #ifdef NDK_DEBUG
@@ -18,6 +22,16 @@
 #define LOGW(...) do{}while(0)
 #define LOGE(...) do{}while(0)
 #define LOGF(...) do{}while(0)
+#endif
+
+JNIEXPORT jstring JNICALL
+        Java_com_hzy_libp7zip_P7ZipApi_get7zVersionInfo(JNIEnv *env, jclass type);
+
+JNIEXPORT jint JNICALL
+        Java_com_hzy_libp7zip_P7ZipApi_executeCommand(JNIEnv *env, jclass type, jstring command_);
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

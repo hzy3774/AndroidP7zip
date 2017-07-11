@@ -3,13 +3,13 @@ package com.hzy.p7zip.app.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import com.hzy.libp7zip.P7ZipApi;
 import com.hzy.p7zip.app.R;
 
 import butterknife.Bind;
@@ -19,15 +19,10 @@ import butterknife.ButterKnife;
  * Created by huzongyao on 17-7-10.
  */
 
-public class AboutFragment extends Fragment {
+public class HelpFragment extends Fragment {
 
-    @Bind(R.id.fragment_about_content)
-    TextView mVersionInfo;
-    @Bind(R.id.id_info_blog)
-    TextView mInfoBlog;
-    @Bind(R.id.id_info_github)
-    TextView mInfoGitHub;
-
+    @Bind(R.id.fragment_help_webview)
+    WebView mWebView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,11 +32,17 @@ public class AboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_about, null);
+        View rootView = inflater.inflate(R.layout.fragment_help, null);
         ButterKnife.bind(this, rootView);
-        mVersionInfo.setText(P7ZipApi.get7zVersionInfo());
-        mInfoGitHub.setMovementMethod(LinkMovementMethod.getInstance());
-        mInfoBlog.setMovementMethod(LinkMovementMethod.getInstance());
+        mWebView.getSettings().setBuiltInZoomControls(false);
+        mWebView.getSettings().setAllowFileAccess(true);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
+        mWebView.loadUrl("file:///android_asset/manual/start.htm");
         return rootView;
     }
 }
