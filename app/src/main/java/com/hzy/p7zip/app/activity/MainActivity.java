@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.hzy.p7zip.app.R;
 import com.hzy.p7zip.app.fragment.AboutFragment;
 import com.hzy.p7zip.app.fragment.HelpFragment;
+import com.hzy.p7zip.app.fragment.StorageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +76,16 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_home:
                 break;
             case R.id.nav_storage:
+                showFragment(StorageFragment.class);
                 break;
             case R.id.nav_help:
                 showFragment(HelpFragment.class);
                 break;
             case R.id.nav_about:
                 showFragment(AboutFragment.class);
+                break;
+            case R.id.nav_exit:
+                finish();
                 break;
         }
         return true;

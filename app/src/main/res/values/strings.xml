@@ -15,4 +15,5 @@
     <string name="info_blog">Blog: <a href="https://huzongyao.github.io/">https://huzongyao.github.io/</a></string>
     <string name="info_qq">QQ: 377406997</string>
     <string name="info_mail">Mail: hzy3774@qq.com</string>
+    <string name="exit">Exit</string>
 </resources>
