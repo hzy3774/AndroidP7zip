@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         mFragmentList = new ArrayList<>();
         mFragmentManager = getSupportFragmentManager();
         navigationView.setNavigationItemSelectedListener(this);
+        showFragment(StorageFragment.class);
     }
 
     private void initToolbar() {
@@ -73,8 +74,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         int id = item.getItemId();
         switch (id) {
-            case R.id.nav_home:
-                break;
             case R.id.nav_storage:
                 showFragment(StorageFragment.class);
                 break;
