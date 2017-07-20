@@ -36,7 +36,7 @@ import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
  */
 
 public class StorageFragment extends Fragment
-        implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+        implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, View.OnLongClickListener {
 
     @Bind(R.id.fragment_storage_path)
     RecyclerView mPathListView;
@@ -65,12 +65,13 @@ public class StorageFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_storage, null);
         ButterKnife.bind(this, rootView);
-        mStorageListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mStorageListView.setAdapter(mFileItemAdapter = new FileItemAdapter(getActivity(), this));
-        mSwipRefresh.setOnRefreshListener(this);
 
         mPathListView.setLayoutManager(new LinearLayoutManager(getContext(), HORIZONTAL, false));
         mPathListView.setAdapter(mFilePathAdapter = new PathItemAdapter(getActivity(), this));
+
+        mStorageListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mStorageListView.setAdapter(mFileItemAdapter = new FileItemAdapter(getActivity(), this, this));
+        mSwipRefresh.setOnRefreshListener(this);
         return rootView;
     }
 
@@ -110,7 +111,14 @@ public class StorageFragment extends Fragment
             FileInfo info = (FileInfo) v.getTag();
             if (info.isFolder()) {
                 loadPathInfo(info.getFilePath());
+            } else {
+
             }
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return true;
     }
 }

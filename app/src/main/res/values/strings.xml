@@ -16,4 +16,5 @@
     <string name="info_qq">QQ: 377406997</string>
     <string name="info_mail">Mail: hzy3774@qq.com</string>
     <string name="exit">Exit</string>
+    <string name="items">%d items</string>
 </resources>

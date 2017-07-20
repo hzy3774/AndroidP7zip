@@ -15,6 +15,7 @@ model {
 
         ndk {
             moduleName "p7zip"
+            platformVersion 18
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
             cppFlags.add('-I' + file("src/main/jni"))

@@ -4,6 +4,7 @@ import com.hzy.p7zip.app.bean.FileInfo;
 import com.hzy.p7zip.app.bean.FileType;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,26 +16,43 @@ import java.util.List;
  */
 
 public class FileUtils {
+    private static final String[] ARCHIVE_ARRAY = {"rar", "zip", "7z", "bz2", "bzip2",
+            "tbz2", "tbz", "gz", "gzip", "tgz", "tar", "xz", "txz"};
+
     public static FileInfo getFileInfoFromPath(String filePath) {
         FileInfo info = new FileInfo();
         File file = new File(filePath);
         info.setFileName(file.getName());
         info.setFilePath(file.getAbsolutePath());
         info.setFileType(FileType.fileunknown);
-        if (file.isDirectory() && file.canRead()) {
+        if (file.isDirectory()) {
             info.setFolder(true);
+            info.setFileType(FileType.folderEmpty);
             String[] fileList = file.list();
             if (fileList != null) {
                 if (fileList.length > 0) {
+                    info.setSubCount(fileList.length);
                     info.setFileType(FileType.folderFull);
-                } else {
-                    info.setFileType(FileType.folderEmpty);
                 }
             }
         } else {
-            info.setFileType(FileType.fileunknown);
+            info.setFileLength(file.length());
+            if (isArchive(file)) {
+                info.setFileType(FileType.filearchive);
+            }
         }
         return info;
+    }
+
+    private static boolean isArchive(File file) {
+        String fileName = file.getName();
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        for (String suf : ARCHIVE_ARRAY) {
+            if (suffix.equals(suf)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static List<FileInfo> getInfoListFromPath(String path) {

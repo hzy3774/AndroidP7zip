@@ -9,6 +9,8 @@ public class FileInfo {
     private String filePath;
     private boolean isFolder;
     private FileType fileType;
+    private int subCount;
+    private long fileLength;
 
     public FileInfo(String fileName, String filePath, boolean isFolder, FileType fileType) {
         this.fileName = fileName;
@@ -18,6 +20,22 @@ public class FileInfo {
     }
 
     public FileInfo() {
+    }
+
+    public long getFileLength() {
+        return fileLength;
+    }
+
+    public void setFileLength(long fileLength) {
+        this.fileLength = fileLength;
+    }
+
+    public int getSubCount() {
+        return subCount;
+    }
+
+    public void setSubCount(int subCount) {
+        this.subCount = subCount;
     }
 
     public String getFileName() {

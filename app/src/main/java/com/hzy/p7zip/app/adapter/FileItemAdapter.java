@@ -2,6 +2,7 @@ package com.hzy.p7zip.app.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +24,15 @@ import butterknife.ButterKnife;
 
 public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.ViewHolder> {
 
+    private View.OnLongClickListener mLongClickListener;
     private View.OnClickListener mItemClickListener;
     private Activity mActivity;
     private List<FileInfo> mFileInfoList;
 
-    public FileItemAdapter(Activity activity, View.OnClickListener listener) {
+    public FileItemAdapter(Activity activity, View.OnClickListener clickListener, View.OnLongClickListener longClickListener) {
         mActivity = activity;
-        mItemClickListener = listener;
+        mItemClickListener = clickListener;
+        mLongClickListener = longClickListener;
         mFileInfoList = new ArrayList<>();
     }
 
@@ -37,6 +40,7 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(mActivity).inflate(R.layout.storage_list_item, parent, false);
         rootView.setOnClickListener(mItemClickListener);
+        rootView.setOnLongClickListener(mLongClickListener);
         return new ViewHolder(rootView);
     }
 
@@ -51,6 +55,14 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.ViewHo
             case folderEmpty:
                 iconId = R.drawable.icon_folder_empty;
                 break;
+            case filearchive:
+                iconId = R.drawable.icon_file_archive;
+                break;
+        }
+        if (item.isFolder()) {
+            holder.subCount.setText(mActivity.getString(R.string.items, item.getSubCount()));
+        } else {
+            holder.subCount.setText(Formatter.formatFileSize(mActivity, item.getFileLength()));
         }
         holder.itemView.setTag(item);
         holder.fileName.setText(item.getFileName());
@@ -74,6 +86,9 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.ViewHo
 
         @Bind(R.id.file_item_name)
         TextView fileName;
+
+        @Bind(R.id.file_sub_count)
+        TextView subCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
