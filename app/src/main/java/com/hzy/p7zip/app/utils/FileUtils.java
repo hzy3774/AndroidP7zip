@@ -87,4 +87,8 @@ public class FileUtils {
         score |= file.isHidden() ? 0 : 0x01;
         return score;
     }
+
+    public static String getParentPath(String path) {
+        return path.substring(0, path.lastIndexOf(File.separatorChar));
+    }
 }

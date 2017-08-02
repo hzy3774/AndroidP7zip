@@ -1,5 +1,6 @@
 package com.hzy.p7zip.app.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -10,13 +11,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.hzy.libp7zip.P7ZipApi;
 import com.hzy.p7zip.app.R;
 import com.hzy.p7zip.app.adapter.FileItemAdapter;
 import com.hzy.p7zip.app.adapter.PathItemAdapter;
 import com.hzy.p7zip.app.bean.FileInfo;
+import com.hzy.p7zip.app.command.Command;
 import com.hzy.p7zip.app.utils.FileUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +36,12 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
+import static com.hzy.p7zip.app.command.ExitCode.EXIT_CMD_ERROR;
+import static com.hzy.p7zip.app.command.ExitCode.EXIT_FATAL;
+import static com.hzy.p7zip.app.command.ExitCode.EXIT_MEMORY_ERROR;
+import static com.hzy.p7zip.app.command.ExitCode.EXIT_NOT_SUPPORT;
+import static com.hzy.p7zip.app.command.ExitCode.EXIT_OK;
+import static com.hzy.p7zip.app.command.ExitCode.EXIT_WARNING;
 
 /**
  * Created by huzongyao on 17-7-10.
@@ -51,6 +63,7 @@ public class StorageFragment extends Fragment
     private String mCurPath;
     private FileItemAdapter mFileItemAdapter;
     private PathItemAdapter mFilePathAdapter;
+    private ProgressDialog dialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +75,8 @@ public class StorageFragment extends Fragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_storage, null);
         ButterKnife.bind(this, rootView);
 
@@ -105,10 +119,11 @@ public class StorageFragment extends Fragment
 
     @Override
     public void onClick(View v) {
-        if (v.getTag() instanceof String) {
-            loadPathInfo((String) v.getTag());
-        } else {
-            FileInfo info = (FileInfo) v.getTag();
+        Object tag = v.getTag();
+        if (tag instanceof String) {
+            loadPathInfo((String) tag);
+        } else if (tag instanceof FileInfo) {
+            FileInfo info = (FileInfo) tag;
             if (info.isFolder()) {
                 loadPathInfo(info.getFilePath());
             } else {
@@ -119,6 +134,97 @@ public class StorageFragment extends Fragment
 
     @Override
     public boolean onLongClick(View v) {
+        Object tag = v.getTag();
+        if (tag instanceof FileInfo) {
+            final FileInfo info = (FileInfo) tag;
+            new MaterialDialog.Builder(getActivity())
+                    .title(R.string.select_operation)
+                    .items(R.array.popup_menu_items)
+                    .itemsCallback(new MaterialDialog.ListCallback() {
+                        @Override
+                        public void onSelection(MaterialDialog dialog, View itemView,
+                                                int position, CharSequence text) {
+                            switch (position) {
+                                case 0:
+                                    onCompressFile(info);
+                                    break;
+                                case 1:
+                                    onExtractFile(info);
+                                    break;
+                                case 3:
+                                    onRemoveFile(info);
+                                    break;
+                            }
+                        }
+                    })
+                    .show();
+        }
         return true;
     }
+
+    private void onRemoveFile(FileInfo info) {
+
+    }
+
+    private void onCompressFile(FileInfo info) {
+
+    }
+
+    private void onExtractFile(final FileInfo info) {
+        String cmd = Command.getExtractCmd(info.getFilePath(), info.getFilePath() + "-ext");
+        runCommand(cmd);
+    }
+
+    private void runCommand(final String cmd) {
+        if (dialog == null) {
+            dialog = new ProgressDialog(getActivity());
+            dialog.setTitle(R.string.progress_title);
+            dialog.setMessage(getText(R.string.progress_message));
+            dialog.setCancelable(false);
+        }
+        dialog.show();
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                int ret = P7ZipApi.executeCommand(cmd);
+                e.onNext(ret);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        dialog.dismiss();
+                        showResult(integer);
+                        onRefresh();
+                    }
+                });
+    }
+
+    private void showResult(int result) {
+        int retMsgId = R.string.msg_ret_success;
+        switch (result) {
+            case EXIT_OK:
+                retMsgId = R.string.msg_ret_success;
+                break;
+            case EXIT_WARNING:
+                retMsgId = R.string.msg_ret_warning;
+                break;
+            case EXIT_FATAL:
+                retMsgId = R.string.msg_ret_fault;
+                break;
+            case EXIT_CMD_ERROR:
+                retMsgId = R.string.msg_ret_command;
+                break;
+            case EXIT_MEMORY_ERROR:
+                retMsgId = R.string.msg_ret_memmory;
+                break;
+            case EXIT_NOT_SUPPORT:
+                retMsgId = R.string.msg_ret_user_stop;
+                break;
+            default:
+                break;
+        }
+        Toast.makeText(getActivity(), retMsgId, Toast.LENGTH_SHORT).show();
+    }
+
 }

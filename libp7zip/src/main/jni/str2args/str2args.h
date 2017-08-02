@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#define ARGV_LEN_MAX  	256
+#define ARGV_LEN_MAX    512
 #define ARGC_MAX        256
 
 bool str2args(const char *s, char argv[][ARGV_LEN_MAX], int* argc);
