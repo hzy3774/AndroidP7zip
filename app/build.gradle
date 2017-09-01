@@ -13,10 +13,21 @@ model {
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         }
     }
+
+    android.signingConfigs {
+        create("release") {
+            storeFile file('demokey.jks')
+            storePassword 'demokey'
+            keyAlias 'demokey'
+            keyPassword 'demokey'
+        }
+    }
+
     android.buildTypes {
         release {
-            minifyEnabled false
+            useProguard true
             proguardFiles.add(file('proguard-rules.pro'))
+            signingConfig = $("android.signingConfigs.release")
         }
     }
 }
