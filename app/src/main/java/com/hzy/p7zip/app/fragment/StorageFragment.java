@@ -22,7 +22,6 @@ import com.hzy.p7zip.app.bean.FileInfo;
 import com.hzy.p7zip.app.command.Command;
 import com.hzy.p7zip.app.utils.FileUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,7 +166,8 @@ public class StorageFragment extends Fragment
     }
 
     private void onCompressFile(FileInfo info) {
-
+        String cmd = Command.getCompressCmd(info.getFilePath(), info.getFilePath() + ".7z", "7z");
+        runCommand(cmd);
     }
 
     private void onExtractFile(final FileInfo info) {

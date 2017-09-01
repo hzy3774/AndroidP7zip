@@ -28,3 +28,6 @@ An Android compress and extract library, P7Zip port for Android
  * QQ: [377406997](http://wpa.qq.com/msgrd?v=3&uin=377406997&site=qq&menu=yes)
  * Gmail: [hzy3774@gmail.com](mailto:hzy3774@gmail.com)
  * Foxmail: [hzy3774@qq.com](mailto:hzy3774@qq.com)
+ * WeChat: hzy3774
+
+   ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/wechat.png)
