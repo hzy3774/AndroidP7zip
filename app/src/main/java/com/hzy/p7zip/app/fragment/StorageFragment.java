@@ -22,6 +22,8 @@ import com.hzy.p7zip.app.bean.FileInfo;
 import com.hzy.p7zip.app.command.Command;
 import com.hzy.p7zip.app.utils.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,10 +74,8 @@ public class StorageFragment extends Fragment
         loadPathInfo(mCurPath);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_storage, null);
         ButterKnife.bind(this, rootView);
 
@@ -150,7 +150,7 @@ public class StorageFragment extends Fragment
                                 case 1:
                                     onExtractFile(info);
                                     break;
-                                case 3:
+                                case 2:
                                     onRemoveFile(info);
                                     break;
                             }
@@ -159,10 +159,6 @@ public class StorageFragment extends Fragment
                     .show();
         }
         return true;
-    }
-
-    private void onRemoveFile(FileInfo info) {
-
     }
 
     private void onCompressFile(FileInfo info) {
@@ -175,14 +171,46 @@ public class StorageFragment extends Fragment
         runCommand(cmd);
     }
 
-    private void runCommand(final String cmd) {
-        if (dialog == null) {
-            dialog = new ProgressDialog(getActivity());
-            dialog.setTitle(R.string.progress_title);
-            dialog.setMessage(getText(R.string.progress_message));
-            dialog.setCancelable(false);
+    private void onRemoveFile(final FileInfo info) {
+        showProgressDialog();
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> ev) throws Exception {
+                String path = info.getFilePath();
+                String result;
+                File file = new File(path);
+                try {
+                    removeFile(file);
+                    result = "removed: " + info.getFileName();
+                } catch (Exception e) {
+                    result = e.getMessage();
+                }
+                ev.onNext(result);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String result) throws Exception {
+                        dismissProgressDialog();
+                        onRefresh();
+                        Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void removeFile(File file) throws IOException {
+        if (file != null && file.exists()) {
+            if (file.isDirectory()) {
+                for (File sub : file.listFiles()) {
+                    removeFile(sub);
+                }
+            }
+            file.delete();
         }
-        dialog.show();
+    }
+
+    private void runCommand(final String cmd) {
+        showProgressDialog();
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
@@ -193,11 +221,27 @@ public class StorageFragment extends Fragment
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
-                        dialog.dismiss();
+                        dismissProgressDialog();
                         showResult(integer);
                         onRefresh();
                     }
                 });
+    }
+
+    private void showProgressDialog() {
+        if (dialog == null) {
+            dialog = new ProgressDialog(getActivity());
+            dialog.setTitle(R.string.progress_title);
+            dialog.setMessage(getText(R.string.progress_message));
+            dialog.setCancelable(false);
+        }
+        dialog.show();
+    }
+
+    private void dismissProgressDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     private void showResult(int result) {
