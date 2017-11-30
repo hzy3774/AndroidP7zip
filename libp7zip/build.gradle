@@ -3,19 +3,20 @@ apply plugin: 'com.android.model.library'
 model {
     android {
         compileSdkVersion 25
-        buildToolsVersion "26.0.0"
+        buildToolsVersion "25.0.3"
+        publishNonDefault true
 
         defaultConfig {
             minSdkVersion.apiLevel 15
             targetSdkVersion.apiLevel 25
-            versionCode 1
-            versionName "1.0"
+            versionCode 4
+            versionName "1.4"
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         }
 
         ndk {
             moduleName "p7zip"
-            //platformVersion 18
+            platformVersion 18
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
             CFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
             cppFlags.add('-I' + file("src/main/jni"))
@@ -29,8 +30,8 @@ model {
                              "-DUNIX_USE_WIN_FILE", "-fPIC"])
             ldLibs.addAll(["log"])
             stl "gnustl_static"
-            //abiFilters.addAll(['armeabi'])
-            abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
+            abiFilters.addAll(['armeabi-v7a'])
+            //abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
         }
     }
     android.buildTypes {

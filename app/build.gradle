@@ -1,33 +1,34 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.application'
 
-model {
-    android {
-        compileSdkVersion 25
-        buildToolsVersion "26.0.0"
-        defaultConfig {
-            applicationId "com.hzy.p7zip.app"
-            minSdkVersion.apiLevel 15
-            targetSdkVersion.apiLevel 25
-            versionCode 1
-            versionName "1.0"
-            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        }
-    }
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
-    android.signingConfigs {
-        create("release") {
+    signingConfigs {
+        demokey {
             storeFile file('demokey.jks')
-            storePassword 'demokey'
+            storePassword "demokey"
             keyAlias 'demokey'
             keyPassword 'demokey'
         }
     }
-
-    android.buildTypes {
+    defaultConfig {
+        applicationId "com.hzy.p7zip.app"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 4
+        versionName "1.4"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.demokey
+        }
         release {
-            useProguard true
-            proguardFiles.add(file('proguard-rules.pro'))
-            signingConfig = $("android.signingConfigs.release")
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.demokey
         }
     }
 }
@@ -37,12 +38,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':libp7zip')
+    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
-    testCompile 'junit:junit:4.12'
+    debugCompile project(path: ':libp7zip', configuration: 'debug')
+    releaseCompile project(path: ':libp7zip', configuration: 'release')
 }
