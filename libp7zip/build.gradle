@@ -30,8 +30,8 @@ model {
                              "-DUNIX_USE_WIN_FILE", "-fPIC"])
             ldLibs.addAll(["log"])
             stl "gnustl_static"
-            abiFilters.addAll(['armeabi-v7a'])
-            //abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
+            //abiFilters.addAll(['armeabi-v7a'])
+            abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
         }
     }
     android.buildTypes {
