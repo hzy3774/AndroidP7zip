@@ -1,48 +1,40 @@
-apply plugin: 'com.android.model.library'
+apply plugin: 'com.android.library'
 
-model {
-    android {
-        compileSdkVersion 25
-        buildToolsVersion "25.0.3"
-        publishNonDefault true
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    publishNonDefault true
 
-        defaultConfig {
-            minSdkVersion.apiLevel 15
-            targetSdkVersion.apiLevel 25
-            versionCode 4
-            versionName "1.4"
-            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        }
-
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 5
+        versionName "1.5.0"
         ndk {
-            moduleName "p7zip"
-            platformVersion 18
-            CFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
-            CFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
-            cppFlags.add('-I' + file("src/main/jni"))
-            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP"))
-            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/Common"))
-            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/include_windows"))
-            cppFlags.add('-I' + file("src/main/jni/p7zip/CPP/myWindows"))
-
-            cppFlags.addAll(["-DANDROID_NDK", "-fexceptions", "-DNDEBUG", "-D_REENTRANT",
-                             "-DENV_UNIX", "-DBREAK_HANDLER", "-DUNICODE", "-D_UNICODE",
-                             "-DUNIX_USE_WIN_FILE", "-fPIC"])
-            ldLibs.addAll(["log"])
-            stl "gnustl_static"
-            //abiFilters.addAll(['armeabi-v7a'])
-            abiFilters.addAll(['armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'])
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_STL=gnustl_static', '-DANDROID_PLATFORM=android-18'
+            }
         }
     }
-    android.buildTypes {
+    buildTypes {
         debug {
-            ndk {
-                cppFlags.add('-DNDK_DEBUG')
+            externalNativeBuild {
+                cmake {
+                    cppFlags.add('-DNATIVE_LOG')
+                }
             }
         }
         release {
             minifyEnabled false
             proguardFiles.add(file('proguard-rules.pro'))
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
         }
     }
 }

@@ -55,7 +55,8 @@ import static com.hzy.p7zip.app.command.ExitCode.EXIT_WARNING;
  */
 
 public class StorageFragment extends Fragment
-        implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, View.OnLongClickListener {
+        implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
+        View.OnLongClickListener {
 
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 1;
 
@@ -83,7 +84,7 @@ public class StorageFragment extends Fragment
                 == PackageManager.PERMISSION_GRANTED) {
             loadPathInfo(mCurPath);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]
+            requestPermissions(new String[]
                     {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_EXTERNAL_STORAGE);
         }
     }

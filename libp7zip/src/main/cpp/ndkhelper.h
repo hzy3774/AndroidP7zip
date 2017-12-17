@@ -7,8 +7,8 @@ extern "C" {
 
 #include <jni.h>
 
-#ifdef NDK_DEBUG
-#define LOG_TAG "jniLog"
+#ifdef NATIVE_LOG
+#define LOG_TAG "NATIVE.LOG"
 #include <android/log.h>
 
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)

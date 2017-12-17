@@ -3,7 +3,15 @@ AndroidP7zip(P7Zip安卓)
 An Android compress and extract library, P7Zip port for Android
 
 ### Details
- This project is for me to learn Streams, NDK, and for fun.
+
+#### Begin To Use
+```gradle
+dependencies {
+    compile 'com.hzy:libp7zip:1.5.0'
+}
+```
+
+#### This project is for me to learn Streams, NDK, and for fun.
  * More information: [http://p7zip.sourceforge.net/](http://p7zip.sourceforge.net/)
  * Compiled native code with gradle-experimental
  * Tested on android 4.x, 5.x and 6.0
