@@ -11,6 +11,9 @@ dependencies {
 }
 ```
 
+### Screenshot
+![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/screenshot.gif)
+
 #### This project is for me to learn Streams, NDK, and for fun.
  * More information: [http://p7zip.sourceforge.net/](http://p7zip.sourceforge.net/)
  * Compiled native code with gradle-experimental
@@ -38,4 +41,4 @@ dependencies {
  * Foxmail: [hzy3774@qq.com](mailto:hzy3774@qq.com)
  * WeChat: hzy3774
 
-   ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/wechat.png)
+ ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/wechat.png)
