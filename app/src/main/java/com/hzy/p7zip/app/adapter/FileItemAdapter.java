@@ -15,7 +15,7 @@ import com.hzy.p7zip.app.bean.FileInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -81,13 +81,13 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.file_item_icon)
+        @BindView(R.id.file_item_icon)
         ImageView icon;
 
-        @Bind(R.id.file_item_name)
+        @BindView(R.id.file_item_name)
         TextView fileName;
 
-        @Bind(R.id.file_sub_count)
+        @BindView(R.id.file_sub_count)
         TextView subCount;
 
         public ViewHolder(View itemView) {

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.hzy.libp7zip.P7ZipApi;
 import com.hzy.p7zip.app.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -21,11 +21,11 @@ import butterknife.ButterKnife;
 
 public class AboutFragment extends Fragment {
 
-    @Bind(R.id.fragment_about_content)
+    @BindView(R.id.fragment_about_content)
     TextView mVersionInfo;
-    @Bind(R.id.id_info_blog)
+    @BindView(R.id.id_info_blog)
     TextView mInfoBlog;
-    @Bind(R.id.id_info_github)
+    @BindView(R.id.id_info_github)
     TextView mInfoGitHub;
 
 
