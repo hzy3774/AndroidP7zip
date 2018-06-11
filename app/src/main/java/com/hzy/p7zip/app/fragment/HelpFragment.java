@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 
 import com.hzy.p7zip.app.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 
 public class HelpFragment extends Fragment {
 
-    @Bind(R.id.fragment_help_webview)
+    @BindView(R.id.fragment_help_webview)
     WebView mWebView;
 
     @Override

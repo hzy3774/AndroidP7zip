@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
 
     signingConfigs {
         demokey {
@@ -39,12 +39,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
-    debugCompile project(path: ':libp7zip', configuration: 'debug')
-    releaseCompile project(path: ':libp7zip', configuration: 'release')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    implementation project(':libp7zip')
+    //debugCompile project(path: ':libp7zip', configuration: 'debug')
+    //releaseCompile project(path: ':libp7zip', configuration: 'release')
 }

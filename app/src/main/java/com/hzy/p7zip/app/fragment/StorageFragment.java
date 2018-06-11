@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -60,13 +60,13 @@ public class StorageFragment extends Fragment
 
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 1;
 
-    @Bind(R.id.fragment_storage_path)
+    @BindView(R.id.fragment_storage_path)
     RecyclerView mPathListView;
 
-    @Bind(R.id.fragment_storage_list)
+    @BindView(R.id.fragment_storage_list)
     RecyclerView mStorageListView;
 
-    @Bind(R.id.fragment_storage_refresh)
+    @BindView(R.id.fragment_storage_refresh)
     SwipeRefreshLayout mSwipRefresh;
 
     private List<FileInfo> mCurFileInfoList;
