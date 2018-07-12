@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.blankj.utilcode.util.SnackbarUtils;
 import com.hzy.libp7zip.P7ZipApi;
 import com.hzy.p7zip.app.R;
 import com.hzy.p7zip.app.adapter.FileItemAdapter;
@@ -62,12 +62,10 @@ public class StorageFragment extends Fragment
 
     @BindView(R.id.fragment_storage_path)
     RecyclerView mPathListView;
-
     @BindView(R.id.fragment_storage_list)
     RecyclerView mStorageListView;
-
     @BindView(R.id.fragment_storage_refresh)
-    SwipeRefreshLayout mSwipRefresh;
+    SwipeRefreshLayout mSwipeRefresh;
 
     private List<FileInfo> mCurFileInfoList;
     private String mCurPath;
@@ -110,7 +108,7 @@ public class StorageFragment extends Fragment
 
         mStorageListView.setLayoutManager(new LinearLayoutManager(getContext()));
         mStorageListView.setAdapter(mFileItemAdapter = new FileItemAdapter(getActivity(), this, this));
-        mSwipRefresh.setOnRefreshListener(this);
+        mSwipeRefresh.setOnRefreshListener(this);
         return rootView;
     }
 
@@ -128,7 +126,7 @@ public class StorageFragment extends Fragment
                     @Override
                     public void accept(List<FileInfo> fileInfos) throws Exception {
                         mFileItemAdapter.setDataList(mCurFileInfoList);
-                        mSwipRefresh.setRefreshing(false);
+                        mSwipeRefresh.setRefreshing(false);
                         mCurPath = path;
                         mFilePathAdapter.setPathView(mCurPath);
                         mStorageListView.smoothScrollToPosition(0);
@@ -188,12 +186,14 @@ public class StorageFragment extends Fragment
     }
 
     private void onCompressFile(FileInfo info) {
-        String cmd = Command.getCompressCmd(info.getFilePath(), info.getFilePath() + ".7z", "7z");
+        String cmd = Command.getCompressCmd(info.getFilePath(),
+                info.getFilePath() + ".7z", "7z");
         runCommand(cmd);
     }
 
     private void onExtractFile(final FileInfo info) {
-        String cmd = Command.getExtractCmd(info.getFilePath(), info.getFilePath() + "-ext");
+        String cmd = Command.getExtractCmd(info.getFilePath(),
+                info.getFilePath() + "-ext");
         runCommand(cmd);
     }
 
@@ -219,7 +219,7 @@ public class StorageFragment extends Fragment
                     public void accept(String result) throws Exception {
                         dismissProgressDialog();
                         onRefresh();
-                        Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                        SnackbarUtils.with(mSwipeRefresh).setMessage(result).show();
                     }
                 });
     }
@@ -294,7 +294,7 @@ public class StorageFragment extends Fragment
             default:
                 break;
         }
-        Toast.makeText(getActivity(), retMsgId, Toast.LENGTH_SHORT).show();
+        SnackbarUtils.with(mSwipeRefresh).setMessage(getString(retMsgId)).show();
     }
 
 }

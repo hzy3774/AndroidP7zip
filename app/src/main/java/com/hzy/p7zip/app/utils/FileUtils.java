@@ -4,10 +4,8 @@ import com.hzy.p7zip.app.bean.FileInfo;
 import com.hzy.p7zip.app.bean.FileType;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,6 +14,7 @@ import java.util.List;
  */
 
 public class FileUtils {
+
     private static final String[] ARCHIVE_ARRAY = {"rar", "zip", "7z", "bz2", "bzip2",
             "tbz2", "tbz", "gz", "gzip", "tgz", "tar", "xz", "txz"};
 

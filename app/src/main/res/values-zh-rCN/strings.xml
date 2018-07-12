@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">P7Zip</string>
+
+    <string name="action_settings">设置</string>
+    <string name="settings">设置</string>
+    <string name="storage">存储</string>
+    <string name="home">Home</string>
+    <string name="about">关于</string>
+    <string name="help">帮助</string>
+    <string name="select_operation">选择操作</string>
+</resources>

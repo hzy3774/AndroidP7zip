@@ -29,10 +29,8 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
