@@ -21,7 +21,7 @@
     <string name="folder_cant_extract">Folder Can Not Be Extracted!</string>
 
     <string name="progress_title">Message</string>
-    <string name="progress_message">Please wait...</string>
+    <string name="progress_message">Please wait…</string>
     <string name="msg_ret_success">Success</string>
     <string name="msg_ret_warning">Warning (Non fatal error(s))</string>
     <string name="msg_ret_fault">Fatal error </string>

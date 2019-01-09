@@ -6,11 +6,13 @@ extern "C" {
 #endif
 
 #include <jni.h>
+#include <android/log.h>
+#include <7zip/MyVersion.h>
+
+#define MY_P7ZIP_VERSION_INFO "P7Zip Version: "MY_VERSION"\n"MY_COPYRIGHT"\nDate: "MY_DATE
 
 #ifdef NATIVE_LOG
 #define LOG_TAG "NATIVE.LOG"
-#include <android/log.h>
-
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
@@ -24,11 +26,26 @@ extern "C" {
 #define LOGF(...) do{}while(0)
 #endif
 
-JNIEXPORT jstring JNICALL
-        Java_com_hzy_libp7zip_P7ZipApi_get7zVersionInfo(JNIEnv *env, jclass type);
+#define JNI_FUNC(X) Java_com_hzy_libp7zip_P7ZipApi_##X
 
+/**
+ * To Get lib p7zip version info
+ * @param env
+ * @param type
+ * @return
+ */
+JNIEXPORT jstring JNICALL
+JNI_FUNC(get7zVersionInfo)(JNIEnv *env, jclass type);
+
+/**
+ * To execute some command with p7zip
+ * @param env
+ * @param type
+ * @param command_
+ * @return
+ */
 JNIEXPORT jint JNICALL
-        Java_com_hzy_libp7zip_P7ZipApi_executeCommand(JNIEnv *env, jclass type, jstring command_);
+JNI_FUNC(executeCommand)(JNIEnv *env, jclass type, jstring command_);
 
 #ifdef __cplusplus
 }

@@ -16,10 +16,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.util.SnackbarUtils;
+import com.hzy.libp7zip.ExitCode;
 import com.hzy.libp7zip.P7ZipApi;
 import com.hzy.p7zip.app.R;
 import com.hzy.p7zip.app.adapter.FileItemAdapter;
@@ -43,12 +43,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
-import static com.hzy.p7zip.app.command.ExitCode.EXIT_CMD_ERROR;
-import static com.hzy.p7zip.app.command.ExitCode.EXIT_FATAL;
-import static com.hzy.p7zip.app.command.ExitCode.EXIT_MEMORY_ERROR;
-import static com.hzy.p7zip.app.command.ExitCode.EXIT_NOT_SUPPORT;
-import static com.hzy.p7zip.app.command.ExitCode.EXIT_OK;
-import static com.hzy.p7zip.app.command.ExitCode.EXIT_WARNING;
 
 /**
  * Created by huzongyao on 17-7-10.
@@ -273,22 +267,22 @@ public class StorageFragment extends Fragment
     private void showResult(int result) {
         int retMsgId = R.string.msg_ret_success;
         switch (result) {
-            case EXIT_OK:
+            case ExitCode.EXIT_OK:
                 retMsgId = R.string.msg_ret_success;
                 break;
-            case EXIT_WARNING:
+            case ExitCode.EXIT_WARNING:
                 retMsgId = R.string.msg_ret_warning;
                 break;
-            case EXIT_FATAL:
+            case ExitCode.EXIT_FATAL:
                 retMsgId = R.string.msg_ret_fault;
                 break;
-            case EXIT_CMD_ERROR:
+            case ExitCode.EXIT_CMD_ERROR:
                 retMsgId = R.string.msg_ret_command;
                 break;
-            case EXIT_MEMORY_ERROR:
+            case ExitCode.EXIT_MEMORY_ERROR:
                 retMsgId = R.string.msg_ret_memmory;
                 break;
-            case EXIT_NOT_SUPPORT:
+            case ExitCode.EXIT_NOT_SUPPORT:
                 retMsgId = R.string.msg_ret_user_stop;
                 break;
             default:

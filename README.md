@@ -3,12 +3,32 @@ AndroidP7zip(P7Zip安卓)
 An Android compress and extract library, P7Zip port for Android
 
 ### Details
+#### Get Started
 
-#### Begin To Use
-```gradle
+* Add gradle dependencie:
+``` gradle
 dependencies {
-    compile 'com.hzy:libp7zip:1.5.0'
+    implementation 'com.hzy:libp7zip:1.6.0'
 }
+```
+* Or just download the aar [here](https://jcenter.bintray.com/com/hzy/libp7zip/)
+
+* If you want to add some abi filters
+``` gradle
+android {
+    ...
+    defaultConfig {
+        ...
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
+         }
+    }
+}
+```
+
+* Simple interface
+``` java
+P7ZipApi.executeCommand(String command);
 ```
 
 ### Screenshot
