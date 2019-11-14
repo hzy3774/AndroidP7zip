@@ -5,12 +5,12 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -DANDROID_NDK -fexceptions -DNDEBUG -D_REENTRANT -DENV_UNIX")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DANDROID_NDK -fexceptions -DNDEBUG -D_REENTRANT -DENV_UNIX")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBREAK_HANDLER -DUNICODE -D_UNICODE -DUNIX_USE_WIN_FILE -fPIC")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+add_definitions("-w")
+add_definitions("-fvisibility=hidden")
+add_definitions("-Wno-error=c++11-narrowing")
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -19,9 +19,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 file(GLOB_RECURSE NATIVE_SRCS *.c *.cpp)
 
 include_directories(./ p7zip/CPP
-                    p7zip/CPP/Common
-                    p7zip/CPP/myWindows
-                    p7zip/CPP/include_windows)
+        p7zip/CPP/Common
+        p7zip/CPP/myWindows
+        p7zip/CPP/include_windows)
 
 add_library(p7zip SHARED ${NATIVE_SRCS})
 

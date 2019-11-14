@@ -9,8 +9,6 @@ extern "C" {
 #include <android/log.h>
 #include <7zip/MyVersion.h>
 
-#define MY_P7ZIP_VERSION_INFO "P7Zip Version: "MY_VERSION"\n"MY_COPYRIGHT"\nDate: "MY_DATE
-
 #ifdef NATIVE_LOG
 #define LOG_TAG "NATIVE.LOG"
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)

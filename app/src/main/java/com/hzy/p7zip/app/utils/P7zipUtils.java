@@ -13,7 +13,7 @@ import java.util.List;
  * Created by huzongyao on 17-7-13.
  */
 
-public class FileUtils {
+public class P7zipUtils {
 
     private static final String[] ARCHIVE_ARRAY = {"rar", "zip", "7z", "bz2", "bzip2",
             "tbz2", "tbz", "gz", "gzip", "tgz", "tar", "xz", "txz"};

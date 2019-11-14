@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     signingConfigs {
         demokey {
@@ -14,13 +14,16 @@ android {
     defaultConfig {
         applicationId "com.hzy.p7zip.app"
         minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 6
-        versionName "1.6.0"
+        targetSdkVersion 29
+        versionCode 7
+        versionName "1.7.0"
         ndk {
             abiFilters 'armeabi-v7a'
         }
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         debug {
@@ -33,6 +36,13 @@ android {
             signingConfig signingConfigs.demokey
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def fileName = project.name + '-' + variant.name + '-V' +
+                    defaultConfig.versionName + ".apk"
+            outputFileName = fileName
+        }
+    }
     lintOptions {
         abortOnError false
     }
@@ -40,14 +50,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'com.blankj:utilcode:1.22.9'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.blankj:utilcode:1.25.9'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation project(':libp7zip')
 }

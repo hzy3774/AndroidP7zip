@@ -1,19 +1,17 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 6
-        versionName "1.6.0"
-        ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
-        }
+        targetSdkVersion 29
+        versionCode 7
+        versionName "1.7.0"
         externalNativeBuild {
             cmake {
-                arguments '-DANDROID_STL=gnustl_static', '-DANDROID_PLATFORM=android-18'
+                arguments '-DANDROID_STL=c++_static', '-DANDROID_PLATFORM=android-18'
             }
         }
     }
@@ -40,3 +38,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+//publish {
+//    userOrg = 'huzongyao'
+//    groupId = 'com.hzy'
+//    artifactId = 'libp7zip'
+//    publishVersion = '1.7.0'
+//    desc = 'An Android compress and extract library support popular compression format such as rar, zip, tar, lzma. based on p7zip.'
+//    website = 'https://github.com/hzy3774/AndroidP7zip'
+//}

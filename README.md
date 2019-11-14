@@ -4,11 +4,12 @@ An Android compress and extract library, P7Zip port for Android
 
 ### Details
 #### Get Started
+* Download to experience[download](https://github.com/hzy3774/AndroidP7zip/releases/latest)
 
 * Add gradle dependencie:
 ``` gradle
 dependencies {
-    implementation 'com.hzy:libp7zip:1.6.0'
+    implementation 'com.hzy:libp7zip:1.7.0'
 }
 ```
 * Or just download the aar [here](https://jcenter.bintray.com/com/hzy/libp7zip/)
@@ -31,6 +32,12 @@ android {
 P7ZipApi.executeCommand(String command);
 ```
 
+* Commands:
+``` shell
+7z a archive1.zip subdir\
+7z x archive.zip -oc:\soft *.cpp -r
+```
+
 ### Screenshot
 ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/screenshot.gif)
 
@@ -42,23 +49,27 @@ P7ZipApi.executeCommand(String command);
 
  | Format | Creation | Filename Extensions |
  |:-------|:---------|:-----------------|
- | 7z | X | 7z |
- | BZIP2 | X | bz2 bzip2 tbz2 tbz |
- | GZIP | X | gz gzip tgz |
- | TAR | X | tar |
- | WIM | X | wim swm |
- | XZ | X | xz txz |
- | zip | X | zip zipx jar xpi odt ods docx xlsx epub |
+ | 7z | √ | 7z |
+ | BZIP2 | √ | bz2 bzip2 tbz2 tbz |
+ | GZIP | √ | gz gzip tgz |
+ | TAR | √ | tar |
+ | WIM | √ | wim swm |
+ | XZ | √ | xz txz |
+ | zip | √ | zip zipx jar xpi odt ods docx xlsx epub |
 
 ### About Me
  * GitHub: [https://huzongyao.github.io/](https://huzongyao.github.io/)
- * ITEye博客：[http://hzy3774.iteye.com/](http://hzy3774.iteye.com/)
- * 新浪微博: [http://weibo.com/hzy3774](http://weibo.com/hzy3774)
+ * ITEye博客：[https://hzy3774.iteye.com/](https://hzy3774.iteye.com/)
+ * 新浪微博: [https://weibo.com/hzy3774](https://weibo.com/hzy3774)
 
 ### Contact To Me
- * QQ: [377406997](http://wpa.qq.com/msgrd?v=3&uin=377406997&site=qq&menu=yes)
+ * QQ: [377406997](https://wpa.qq.com/msgrd?v=3&uin=377406997&site=qq&menu=yes)
  * Gmail: [hzy3774@gmail.com](mailto:hzy3774@gmail.com)
  * Foxmail: [hzy3774@qq.com](mailto:hzy3774@qq.com)
  * WeChat: hzy3774
 
  ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/wechat.png)
+
+### Others
+ * 想捐助我喝杯热水(¥0.01起捐)</br>
+ ![donate](https://github.com/huzongyao/JChineseChess/blob/master/misc/donate.png?raw=true)
