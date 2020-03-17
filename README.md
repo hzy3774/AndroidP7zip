@@ -43,6 +43,7 @@ P7ZipApi.executeCommand(String command);
 
 #### This project is for me to learn Streams, NDK, and for fun.
  * More information: [http://p7zip.sourceforge.net/](http://p7zip.sourceforge.net/)
+ * Licence Info: licence of 7-Zip [https://www.7-zip.org/](https://www.7-zip.org/license.txt)
  * Compiled native code with gradle-experimental
  * Tested on android 4.x, 5.x and 6.0
  * Supported common archive formats:
