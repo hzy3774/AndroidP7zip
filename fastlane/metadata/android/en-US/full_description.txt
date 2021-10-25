@@ -1,0 +1,1 @@
+<i>AndroidP7zip</i> is a compress and extract library supporting popular compression formats such as rar, zip, tar, lzma. It is based on p7zip. This app comes with a simple interface, no bells and whistles: just compress, extract or remove.
